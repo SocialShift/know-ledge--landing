@@ -1,8 +1,34 @@
 "use client"
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { useNavbar } from '@/context/NavbarContext'
 
 const HeroSection = () => {
+  const [isJoined, setIsJoined] = useState(false)
+  const { setIsTransparent } = useNavbar()
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When hero section is more than 50% visible, make navbar transparent
+        setIsTransparent(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [setIsTransparent])
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -15,8 +41,101 @@ const HeroSection = () => {
     }
   }
 
+  // SVG variants for tick animation
+  const tickVariants = {
+    checked: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    unchecked: {
+      pathLength: 0,
+      opacity: 0
+    }
+  }
+
+  const handleJoinWaitlist = () => {
+    if (!isJoined) {
+      setIsJoined(true)
+    }
+  }
+
+  // Add iPhone component for reusability
+  const IPhone = ({ className, scale, rotate, opacity, zIndex }) => (
+    <motion.div 
+      className={`relative ${className}`}
+      style={{ zIndex }}
+      initial={false}
+      animate={{ 
+        opacity: opacity, 
+        scale: scale, 
+        rotate: rotate,
+        transition: {
+          duration: 0.4,
+          ease: "easeOut"
+        }
+      }}
+    >
+      <div className="absolute inset-0 bg-gray-900 rounded-[3rem] shadow-2xl" />
+      <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
+        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50">
+          <div className="w-1/2">
+            <Image
+              src="/logo/Logo.svg"
+              alt="know[ledge] app interface"
+              width={200}
+              height={100}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <span className="text-xl font-bold text-blue-900 font-poppins tracking-tight mt-4">
+            know<span className="text-blue-600">[ledge]</span>
+          </span>
+        </div>
+      </div>
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
+    </motion.div>
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
+    <div ref={sectionRef} className="min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden mb-[-32px]">
+      {/* Add decorative curve background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg
+          className="absolute w-full h-[120%] top-0 left-0 transform rotate-180"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <path
+            d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            fill="url(#gradient)"
+            className="opacity-20"
+          >
+            <animate
+              attributeName="d"
+              dur="10s"
+              repeatCount="indefinite"
+              values="
+                M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,112C672,107,768,149,864,165.3C960,181,1056,171,1152,165.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            />
+          </path>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style={{ stopColor: '#3B82F6' }} />
+              <stop offset="50%" style={{ stopColor: '#2563EB' }} />
+              <stop offset="100%" style={{ stopColor: '#1D4ED8' }} />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-100/50 blur-3xl" />
@@ -56,7 +175,7 @@ const HeroSection = () => {
 
       {/* Main content */}
       <div className="container mx-auto px-6 lg:px-12 min-h-screen relative">
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 min-h-screen items-start pt-20 md:pt-32">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start pt-20 md:pt-32">
           {/* Left side - Text content - Slightly adjusted margin */}
           <motion.div 
             className="text-left max-w-xl relative ml-0 md:ml-auto pr-0 md:pr-4"
@@ -74,14 +193,15 @@ const HeroSection = () => {
               className="text-5xl md:text-7xl font-bold text-blue-900 mb-4 font-poppins"
               variants={fadeInUp}
             >
-              know<span className="text-blue-600">[ledge]</span>
+              {/* know<span className="text-blue-600">[ledge]</span> */}
+              Unlock Hidden Histories
             </motion.h1>
             
             <motion.p 
               className="text-lg text-blue-600 font-medium mb-6 font-poppins"
               variants={fadeInUp}
             >
-              Your Gateway to Historical Discovery
+              Your Gateway to Untold Stories Through Interactive Learning
             </motion.p>
 
             <motion.div 
@@ -89,10 +209,10 @@ const HeroSection = () => {
               variants={fadeInUp}
             >
               <p className="text-xl text-gray-700 font-poppins">
-                Embark on an immersive journey through time with our innovative learning platform. Discover fascinating stories, untold narratives, and profound insights from the past.
+                Your Gateway to Untold Stories Through Interactive Learning - Discover fascinating historical narratives.
               </p>
               <p className="text-lg text-gray-600 font-poppins">
-                Experience history like never before through interactive lessons, engaging content, and a community of passionate learners.
+                Question. Learn. Evolve. 📚 Experience History Like Never Before
               </p>
             </motion.div>
 
@@ -106,17 +226,50 @@ const HeroSection = () => {
                 </svg>
                 Download iOS App
               </button>
-              <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Join Waitlist
-              </button>
+              <motion.button
+                onClick={handleJoinWaitlist}
+                className={`px-8 py-4 ${
+                  isJoined 
+                    ? 'bg-green-500 hover:bg-green-600' 
+                    : 'bg-green-500 hover:bg-green-600'
+                } text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins relative`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isJoined ? (
+                  <>
+                    <motion.svg
+                      className="w-6 h-6"
+                      viewBox="0 0 24 24"
+                      initial="unchecked"
+                      animate="checked"
+                    >
+                      <motion.path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M20 6L9 17l-5-5"
+                        variants={tickVariants}
+                      />
+                    </motion.svg>
+                    Joined Successfully
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Join Waitlist
+                  </>
+                )}
+              </motion.button>
             </motion.div>
 
             <motion.div 
               variants={fadeInUp}
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 mb-8"
             >
               <div className="flex -space-x-2">
                 {[1, 2, 3].map((i) => (
@@ -127,7 +280,7 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right side - iPhone mockup - Adjusted position more to the right */}
+          {/* Right side - iPhone mockup - Updated with hover group */}
           <div className="relative flex items-start justify-center md:justify-center h-[600px] md:h-auto pl-0 md:pl-8">
             {/* Background circle for iPhone */}
             <div className="absolute top-1/2 right-1/2 w-[500px] h-[500px] translate-x-1/2 -translate-y-1/2">
@@ -167,35 +320,45 @@ const HeroSection = () => {
               />
             </div>
 
-            {/* Phone mockup */}
+            {/* iPhone Container with hover effect */}
             <motion.div 
-              className="relative w-[280px] md:w-[320px] h-[570px] md:h-[650px] z-10"
+              className="relative w-[280px] md:w-[320px] h-[570px] md:h-[650px] z-10 group cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              {/* Phone frame */}
-              <div className="absolute inset-0 bg-gray-900 rounded-[3rem] shadow-2xl" />
-              {/* Screen */}
-              <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
-                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50">
-                  <div className="w-1/2">
-                    <Image
-                      src="/logo/Logo.svg"
-                      alt="know[ledge] app interface"
-                      width={200}
-                      height={100}
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                  <span className="text-xl font-bold text-blue-900 font-poppins tracking-tight mt-4">
-                    know<span className="text-blue-600">[ledge]</span>
-                  </span>
-                </div>
+              {/* Left iPhone - Appears on hover */}
+              <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] md:w-[320px] h-[570px] md:h-[650px] transform-gpu transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                <IPhone 
+                  className="w-full h-full"
+                  scale={0.8}
+                  rotate={-15}
+                  opacity={0.7}
+                  zIndex={1}
+                />
               </div>
-              {/* Notch */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
+
+              {/* Center iPhone */}
+              <div className="relative w-full h-full transform-gpu transition-all duration-300 group-hover:scale-110">
+                <IPhone 
+                  className="w-full h-full"
+                  scale={1}
+                  rotate={0}
+                  opacity={1}
+                  zIndex={2}
+                />
+              </div>
+
+              {/* Right iPhone - Appears on hover */}
+              <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-[280px] md:w-[320px] h-[570px] md:h-[650px] transform-gpu transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                <IPhone 
+                  className="w-full h-full"
+                  scale={0.8}
+                  rotate={15}
+                  opacity={0.7}
+                  zIndex={1}
+                />
+              </div>
             </motion.div>
           </div>
         </div>

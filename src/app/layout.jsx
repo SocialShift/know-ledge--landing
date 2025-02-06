@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from '@/components/custom/navigation/NavBar'
+import { NavbarProvider } from '@/context/NavbarContext'
+import Footer from '@/components/custom/navigation/Footer'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +22,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "know[ledge] - Rediscover History",
+  title: "know[ledge] - Unlock Hidden Histories",
   description: "Your gateway to historical discovery through interactive learning",
 };
 
@@ -30,8 +32,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
-        <NavBar />
-        {children}
+        <NavbarProvider>
+          <NavBar />
+          {children}
+          <Footer />
+        </NavbarProvider>
       </body>
     </html>
   );
