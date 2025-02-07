@@ -1,10 +1,16 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 const Features = () => {
   const [selectedFeature, setSelectedFeature] = useState(0);
+  const controls = useAnimation();
+  
+  // Initialize animation as soon as component mounts
+  useEffect(() => {
+    controls.start({ y: 0, opacity: 1 });
+  }, [controls]);
 
   const features = [
     {
@@ -39,17 +45,16 @@ const Features = () => {
   return (
     <motion.section 
       initial={{ y: 20, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
+      animate={controls}
       viewport={{ 
-        once: true, 
-        margin: "-50px",
+        once: true,
         amount: 0.1
       }}
       transition={{ 
-        duration: 0.3,
+        duration: 0.5,
         ease: "easeOut"
       }}
-      className="relative bg-gradient-to-b from-blue-950 to-slate-900 py-16 overflow-hidden min-h-[90vh] -mt-32 font-poppins"
+      className="relative bg-gradient-to-b from-blue-950 to-slate-900 py-32 md:py-40 overflow-hidden min-h-[90vh] -mt-32 font-poppins"
     >
       {/* Preload the background with reduced opacity */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-50 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]">
@@ -155,6 +160,14 @@ const Features = () => {
       </div>
     </motion.section>
   );
+};
+
+// Add preload hint for the component
+Features.preload = () => {
+  return {
+    kind: 'preload',
+    as: 'component',
+  };
 };
 
 export default Features;

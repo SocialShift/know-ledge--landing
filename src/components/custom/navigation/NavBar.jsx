@@ -6,7 +6,7 @@ import { useNavbar } from '@/context/NavbarContext'
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false) // Initialize as false for SSR
+  const [isScrolled, setIsScrolled] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
   const { isTransparent } = useNavbar()
 
@@ -26,7 +26,7 @@ const NavBar = () => {
   // Prevent hydration mismatch by not rendering until mounted
   if (!hasMounted) {
     return (
-      <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <nav className="absolute top-0 left-0 right-0 w-full z-50 bg-white/80 backdrop-blur-md">
         {/* Initial loading state */}
         <div className="container mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
@@ -49,10 +49,10 @@ const NavBar = () => {
 
   return (
     <nav 
-      className={`fixed w-full z-50 transition-colors duration-300 ${
+      className={`absolute top-0 left-0 right-0 w-full z-50 transition-colors duration-300 ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-white/80 backdrop-blur-md border-b border-gray-100'
-          : isTransparent ? 'bg-transparent' : 'bg-white/80 backdrop-blur-md border-b border-gray-100'
+          ? 'bg-white/80 backdrop-blur-md'
+          : isTransparent ? 'bg-transparent' : 'bg-white/80 backdrop-blur-md'
       }`}
     >
       <div className="container mx-auto px-6 lg:px-12">

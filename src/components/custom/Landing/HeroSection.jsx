@@ -173,9 +173,9 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Main content */}
+      {/* Main content - Updated padding */}
       <div className="container mx-auto px-6 lg:px-12 min-h-screen relative">
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start pt-20 md:pt-32">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start pt-32 md:pt-40">
           {/* Left side - Text content - Slightly adjusted margin */}
           <motion.div 
             className="text-left max-w-xl relative ml-0 md:ml-auto pr-0 md:pr-4"
