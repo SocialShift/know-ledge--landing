@@ -81,20 +81,14 @@ const HeroSection = () => {
     >
       <div className="absolute inset-0 bg-gray-900 rounded-[3rem] shadow-2xl" />
       <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
-        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50">
-          <div className="w-1/2">
-            <Image
-              src="/logo/Logo.svg"
-              alt="know[ledge] app interface"
-              width={200}
-              height={100}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <span className="text-xl font-bold text-blue-900 font-poppins tracking-tight mt-4">
-            know<span className="text-blue-600">[ledge]</span>
-          </span>
+        <div className="relative w-full h-full">
+          <Image
+            src="/images/hero/holi.jpg"
+            alt="know[ledge] app interface"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
       </div>
       <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
@@ -280,7 +274,7 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right side - iPhone mockup - Updated with hover group */}
+          {/* Right side - iPhone mockup - Removed hover group */}
           <div className="relative flex items-start justify-center md:justify-center h-[600px] md:h-auto pl-0 md:pl-8">
             {/* Background circle for iPhone */}
             <div className="absolute top-1/2 right-1/2 w-[500px] h-[500px] translate-x-1/2 -translate-y-1/2">
@@ -320,43 +314,21 @@ const HeroSection = () => {
               />
             </div>
 
-            {/* iPhone Container with hover effect */}
+            {/* iPhone Container - Removed hover effects */}
             <motion.div 
-              className="relative w-[280px] md:w-[320px] h-[570px] md:h-[650px] z-10 group cursor-pointer"
+              className="relative w-[280px] md:w-[320px] h-[570px] md:h-[650px] z-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              {/* Left iPhone - Appears on hover */}
-              <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] md:w-[320px] h-[570px] md:h-[650px] transform-gpu transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                <IPhone 
-                  className="w-full h-full"
-                  scale={0.8}
-                  rotate={-15}
-                  opacity={0.7}
-                  zIndex={1}
-                />
-              </div>
-
               {/* Center iPhone */}
-              <div className="relative w-full h-full transform-gpu transition-all duration-300 group-hover:scale-110">
+              <div className="relative w-full h-full">
                 <IPhone 
                   className="w-full h-full"
                   scale={1}
                   rotate={0}
                   opacity={1}
                   zIndex={2}
-                />
-              </div>
-
-              {/* Right iPhone - Appears on hover */}
-              <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-[280px] md:w-[320px] h-[570px] md:h-[650px] transform-gpu transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                <IPhone 
-                  className="w-full h-full"
-                  scale={0.8}
-                  rotate={15}
-                  opacity={0.7}
-                  zIndex={1}
                 />
               </div>
             </motion.div>

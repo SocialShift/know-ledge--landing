@@ -54,7 +54,7 @@ const Features = () => {
         duration: 0.5,
         ease: "easeOut"
       }}
-      className="relative bg-gradient-to-b from-blue-950 to-slate-900 py-32 md:py-40 overflow-hidden min-h-[90vh] -mt-32 font-poppins"
+      className="relative bg-gradient-to-b from-blue-950 to-slate-900 py-16 md:py-32 overflow-hidden min-h-[90vh] -mt-16 md:-mt-32 font-poppins"
     >
       {/* Preload the background with reduced opacity */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-50 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]">
@@ -62,22 +62,23 @@ const Features = () => {
       </div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
-        {/* Heading Section with bolder colors */}
-        <div className="text-left max-w-3xl mb-8">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl font-poppins">
+        {/* Updated heading section */}
+        <div className="text-left max-w-3xl mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white sm:text-5xl font-poppins">
             Every feature you need
             <span className="block text-blue-400">to explore history.</span>
           </h2>
-          <p className="mt-4 text-lg text-blue-100/80 font-poppins">
+          <p className="mt-4 text-base md:text-lg text-blue-100/80 font-poppins">
             Built for history enthusiasts who want to explore the past like never before. If other apps are stuck in the present, we bring history to life.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left side - iPhone with enhanced glow */}
-          <div className="relative flex items-center justify-center h-[500px]">
-            {/* Enhanced background circle for iPhone */}
-            <div className="absolute top-1/2 right-1/2 w-[400px] h-[400px] translate-x-1/2 -translate-y-1/2">
+        {/* Updated grid layout - Changed order classes */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start lg:items-center">
+          {/* iPhone container - Now order-1 for both mobile and desktop */}
+          <div className="relative flex items-center justify-center h-[400px] md:h-[500px] order-1">
+            {/* Enhanced background circle */}
+            <div className="absolute top-1/2 right-1/2 w-[280px] md:w-[400px] h-[280px] md:h-[400px] translate-x-1/2 -translate-y-1/2">
               <motion.div 
                 className="w-full h-full bg-gradient-to-br from-blue-400/30 via-blue-500/40 to-blue-600/30 rounded-full blur-2xl"
                 animate={{ 
@@ -94,7 +95,7 @@ const Features = () => {
 
             {/* Phone mockup */}
             <motion.div 
-              className="relative w-[250px] h-[500px] z-10"
+              className="relative w-[200px] md:w-[250px] h-[400px] md:h-[500px] z-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -124,26 +125,26 @@ const Features = () => {
             </motion.div>
           </div>
 
-          {/* Right side - Feature boxes with bolder colors */}
-          <div className="h-[500px] flex flex-col justify-between py-2">
+          {/* Features container - Now order-2 for both mobile and desktop */}
+          <div className="h-auto lg:h-[500px] flex flex-col justify-between gap-4 lg:gap-0 py-2 order-2">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`cursor-pointer group relative rounded-2xl px-6 py-5 transition-all duration-300 h-[145px] flex items-center ${
+                className={`cursor-pointer group relative rounded-2xl px-4 md:px-6 py-4 md:py-5 transition-all duration-300 min-h-[120px] md:h-[145px] flex items-center ${
                   selectedFeature === index
                     ? 'bg-gradient-to-r from-blue-600 to-blue-500 shadow-lg shadow-blue-500/30'
                     : 'hover:bg-white/10 bg-white/5 hover:shadow-lg hover:shadow-blue-500/10'
                 }`}
                 onClick={() => setSelectedFeature(index)}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`rounded-lg p-3 ${
+                <div className="flex items-start gap-3 md:gap-4">
+                  <div className={`rounded-lg p-2 md:p-3 ${
                     selectedFeature === index ? 'bg-blue-400 text-white' : 'bg-blue-900/50 text-blue-400'
                   }`}>
                     {feature.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-2 font-poppins">
+                    <h3 className="text-base md:text-lg font-semibold text-white mb-1 md:mb-2 font-poppins">
                       {feature.title}
                     </h3>
                     <p className={`text-sm leading-relaxed font-poppins ${
