@@ -1,33 +1,10 @@
 "use client"
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-import { useNavbar } from '@/context/NavbarContext'
+import { useState } from 'react'
 
 const HeroSection = () => {
   const [isJoined, setIsJoined] = useState(false)
-  const { setIsTransparent } = useNavbar()
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // When hero section is more than 50% visible, make navbar transparent
-        setIsTransparent(entry.isIntersecting)
-      },
-      { threshold: 0.5 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
-    }
-  }, [setIsTransparent])
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -96,7 +73,7 @@ const HeroSection = () => {
   );
 
   return (
-    <div ref={sectionRef} className="min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden mb-[-32px]">
+    <div className="min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden mb-[-32px]">
       {/* Add decorative curve background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <svg

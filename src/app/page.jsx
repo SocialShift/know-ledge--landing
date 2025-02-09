@@ -3,7 +3,7 @@ import HeroSection from '@/components/custom/Landing/HeroSection'
 import About from '@/components/custom/Landing/About'
 import Promo from '@/components/custom/Landing/Promo'
 import Pills from '@/components/custom/Landing/Pills'
-import AboutSection from '@/components/custom/Landing/AboutSection'
+
 // Preload Features component
 const Features = dynamic(() => import('@/components/custom/Landing/Features'), {
   ssr: true,
@@ -20,7 +20,6 @@ export default function Home() {
       <Pills />
       <Promo />
       <About />
-      {/* <AboutSection /> */}
       {/* <Testimonials /> */}
     </main>
   )
