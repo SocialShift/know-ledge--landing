@@ -12,21 +12,21 @@ const AboutUs = () => {
 
   const teamMembers = [
     {
-      name: "Dr. Sarah Mitchell",
+      name: "jhon doe",
       role: "Founder & CEO",
-      image: "/images/team/sarah.jpg",
+      image: "/images/team/jane.jpg",
       description: "Former Harvard Professor with a passion for making history accessible to everyone."
     },
     {
-      name: "Michael Chen",
+      name: "jane doe",
       role: "Chief Technology Officer",
-      image: "/images/team/michael.jpg",
+      image: "/images/team/john.jpg",
       description: "Tech innovator with expertise in AR/VR and educational platforms."
     },
     {
-      name: "Dr. Emily Rodriguez",
+      name: "ak",
       role: "Head of Content",
-      image: "/images/team/emily.jpg",
+      image: "/images/team/ak.jpg",
       description: "Curator and digital storyteller specializing in interactive historical narratives."
     }
   ];
