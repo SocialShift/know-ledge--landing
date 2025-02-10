@@ -243,9 +243,21 @@ const HeroSection = () => {
               className="flex items-center gap-4 mb-8"
             >
               <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full bg-blue-200 border-2 border-white" />
-                ))}
+                <img 
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces" 
+                  alt="Community member" 
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&crop=faces" 
+                  alt="Community member" 
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                />
+                <img 
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces" 
+                  alt="Community member" 
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                />
               </div>
               <p className="text-gray-600 font-poppins">Join our growing community of history enthusiasts</p>
             </motion.div>

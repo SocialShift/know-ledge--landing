@@ -3,6 +3,8 @@ import HeroSection from '@/components/custom/Landing/HeroSection'
 import About from '@/components/custom/Landing/About'
 import Promo from '@/components/custom/Landing/Promo'
 import Pills from '@/components/custom/Landing/Pills'
+import Faq from '@/components/custom/Landing/Faq'
+import ScrollToTop from '@/components/custom/common/ScrollToTop'
 
 // Preload Features component
 const Features = dynamic(() => import('@/components/custom/Landing/Features'), {
@@ -20,6 +22,8 @@ export default function Home() {
       <Pills />
       <Promo />
       <About />
+      <Faq />
+      <ScrollToTop />
       {/* <Testimonials /> */}
     </main>
   )
