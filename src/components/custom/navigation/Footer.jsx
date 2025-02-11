@@ -4,22 +4,22 @@ import Image from 'next/image'
 const Footer = () => {
   const footerLinks = {
     product: [
-      { label: 'Features', href: '#features' },
-      { label: 'Pricing', href: '#pricing' },
-      { label: 'Download', href: '#download' },
-      { label: 'Updates', href: '#updates' },
+      { label: 'Features', href: '' },
+      { label: 'Pricing', href: '' },
+      { label: 'Download', href: '' },
+      { label: 'Updates', href: '' },
     ],
     company: [
-      { label: 'About', href: '#about' },
-      { label: 'Contact', href: '#contact' },
-      { label: 'Privacy Policy', href: '#privacy' },
-      { label: 'Terms of Service', href: '#terms' },
+      { label: 'About', href: '/about-us' },
+      { label: 'Contact', href: '' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms of Service', href: '/termsNconditions' },
     ],
     resources: [
-      { label: 'Blog', href: '#blog' },
-      { label: 'Documentation', href: '#docs' },
-      { label: 'Community', href: '#community' },
-      { label: 'FAQ', href: '#faq' },
+      { label: 'Blog', href: '' },
+      { label: 'Documentation', href: '' },
+      { label: 'Community', href: '' },
+      { label: 'FAQ', href: '' },
     ],
   }
 
@@ -45,8 +45,8 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-gray-600 font-poppins text-sm leading-relaxed max-w-md">
-              Unlock the power of historical knowledge through interactive learning. 
-              Join us in exploring untold stories and discovering hidden histories.
+              Discover the stories they left out. Join a global community of 
+              learners uncovering history’s untold narratives—one interactive experience at a time
             </p>
           </div>
 

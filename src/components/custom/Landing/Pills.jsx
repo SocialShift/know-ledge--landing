@@ -22,37 +22,37 @@ const Pills = () => {
 
   const pills = [
     {
-      title: "Discover Hidden Stories",
-      subtitle: "Uncover the Past",
-      description: "Dive into a world of untold narratives and forgotten tales. Our platform brings history to life through immersive storytelling and interactive experiences.",
-      image: "/images/hero/mona.jpg",
+      title: "For Those Who Want a Fuller Story",
+      subtitle: "Built for Curious Minds",
+      description: "If you've ever felt like history was incomplete, you're not alone. We bring in the voices and perspectives that traditional narratives often leave out.",
+      image: "/images/hero/pill1.png",
       color: "from-stone-100 to-white",
       accent: "green-700",
       buttonText: "Start Exploring",
-      leftText: "Immerse yourself in a journey through time with our interactive storytelling platform.",
-      rightText: "Each story is carefully curated to provide authentic historical insights and engaging narratives.",
+      leftText: "Discover untold stories and perspectives that challenge traditional historical narratives.",
+      rightText: "Every story matters. Every voice counts. Experience history from all angles."
     },
     {
-      title: "Interactive Learning",
-      subtitle: "Learn by Doing",
-      description: "Experience history hands-on with our interactive features. From virtual tours to augmented reality experiences, make learning history an adventure.",
-      image: "/images/2.jpg",
+      title: "For Thoughtful Learners Everywhere",
+      subtitle: "Deeper Understanding",
+      description: "Deepen your understanding of race, gender, culture, and identity through stories that connect the past to today.",
+      image: "/images/hero/pill4.png",
       color: "from-white to-stone-100",
       accent: "green-700",
-      buttonText: "Try Interactive Features",
-      leftText: "Transform your learning experience with hands-on historical exploration and discovery.",
-      rightText: "Engage with history through cutting-edge interactive features and virtual experiences.",
+      buttonText: "Join the Journey",
+      leftText: "Connect historical events to contemporary issues and understand their lasting impact.",
+      rightText: "Explore how past events shape our understanding of race, gender, culture, and identity."
     },
     {
-      title: "Connect with History",
-      subtitle: "Bridge Past and Present",
-      description: "Join a community of history enthusiasts. Share discoveries, participate in discussions, and contribute to the collective understanding of our shared past.",
-      image: "/images/hero/white.jpg",
+      title: "For Lifelong Explorers",
+      subtitle: "Never Stop Learning",
+      description: "No matter where you are in your learning journey, there's always more to discover. Expand your knowledge with fresh perspectives every day.",
+      image: "/images/hero/pill6.png",
       color: "from-stone-100 to-white",
       accent: "green-700",
-      buttonText: "Join Community",
-      leftText: "Be part of a vibrant community dedicated to preserving and sharing historical knowledge.",
-      rightText: "Connect with fellow history enthusiasts and contribute to our collective understanding.",
+      buttonText: "Begin Discovery",
+      leftText: "Every day brings new insights and perspectives to expand your understanding.",
+      rightText: "Your journey of discovery never ends - there's always more to learn and explore."
     }
   ]
 
@@ -79,7 +79,7 @@ const Pills = () => {
     <section ref={containerRef} className="relative w-full h-[300vh] bg-gradient-to-b from-slate-900 to-blue-950">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-900 to-blue-950">
         <div className="max-w-[1400px] w-full mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          {/* Left Text Section - Hidden on mobile */}
+          {/* Left Text Section */}
           <div className="relative h-[600px] items-center hidden md:flex">
             {pills.map((pill, index) => (
               <motion.div
@@ -129,7 +129,7 @@ const Pills = () => {
               <div className="absolute inset-0 rounded-[2.8rem] bg-gradient-to-bl from-white/10 via-transparent to-transparent opacity-30" />
             </div>
 
-            {/* Screen Container - adjust padding for mobile */}
+            {/* Screen Container */}
             <div className="absolute inset-[4px] bg-white rounded-[2.3rem] sm:rounded-[2.6rem] overflow-hidden shadow-inner">
               {/* Dynamic Island */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100px] h-[25px] bg-black rounded-b-[1.2rem] z-10">
@@ -139,7 +139,6 @@ const Pills = () => {
 
               {/* Content Container */}
               <div className="relative w-full h-full">
-                {/* Pills Content */}
                 {pills.map((pill, index) => (
                   <motion.div
                     key={index}
@@ -160,20 +159,11 @@ const Pills = () => {
                         className="object-cover"
                         priority={index === 0}
                       />
-                      {/* Dark Gradient Overlay for better text readability */}
+                      {/* Dark Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
                       
-                      {/* Text Content Overlay */}
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <h3 className="text-green-400 text-base font-semibold mb-1.5 font-poppins">
-                          {pill.subtitle}
-                        </h3>
-                        <h2 className="text-2xl font-bold mb-3 font-poppins">
-                          {pill.title}
-                        </h2>
-                        <p className="text-sm text-gray-200 mb-4 font-poppins leading-relaxed">
-                          {pill.description}
-                        </p>
+                      {/* Button at the bottom */}
+                      <div className="absolute bottom-6 left-0 right-0 px-6">
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -189,7 +179,7 @@ const Pills = () => {
             </div>
           </motion.div>
 
-          {/* Right Text Section - Hidden on mobile */}
+          {/* Right Text Section */}
           <div className="relative h-[600px] items-center hidden md:flex">
             {pills.map((pill, index) => (
               <motion.div

@@ -108,7 +108,7 @@ const HeroSection = () => {
   );
 
   return (
-    <div className="min-h-[100vh] md:min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden mb-[-16px] md:mb-[-32px]">
+    <div className="min-h-[100vh] md:min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
       {/* Add decorative curve background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <svg
@@ -228,8 +228,8 @@ const HeroSection = () => {
             variants={fadeInUp}
             className="flex flex-col items-center md:items-start text-center md:text-left md:pl-24"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-blue-900 mb-4 md:mb-6 font-poppins max-w-2xl">
-              Unlock Hidden Histories
+            <h1 className="text-5xl sm:text-6xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6 font-poppins max-w-2xl">
+              Uncover Histories They Didn't Teach You
             </h1>
             
             <p className="text-base sm:text-lg text-blue-600 mb-8 md:mb-10 font-poppins max-w-xl">
@@ -238,11 +238,30 @@ const HeroSection = () => {
 
             <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
               <p className="text-lg md:text-xl text-gray-700 font-poppins">
-                Your Gateway to Untold Stories Through Interactive Learning - Discover fascinating historical narratives.
-              </p>
-              <p className="text-base md:text-lg text-gray-600 font-poppins">
                 Question. Learn. Evolve. 📚 Experience History Like Never Before
               </p>
+              
+              <div className="max-w-xl">
+                <p className="text-base text-gray-600 leading-relaxed mb-4">
+                  Know[ledge] is a revolutionary platform that reveals overlooked histories of race, gender, 
+                  sexual orientation, and ethnicity through immersive storytelling and interactive learning.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2 text-gray-600">
+                    <span className="text-green-500 text-lg">✅</span>
+                    <span>Bite-sized stories that challenge the status quo</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-gray-600">
+                    <span className="text-green-500 text-lg">✅</span>
+                    <span>Gamified quizzes & interactive timelines</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-gray-600">
+                    <span className="text-green-500 text-lg">✅</span>
+                    <span>Personalized learning paths powered by AI</span>
+                  </li>
+                </ul>
+                
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-10">
@@ -291,27 +310,6 @@ const HeroSection = () => {
                   </>
                 )}
               </motion.button>
-            </div>
-
-            <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-              <div className="flex -space-x-2">
-                <img 
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces" 
-                  alt="Community member" 
-                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&crop=faces" 
-                  alt="Community member" 
-                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces" 
-                  alt="Community member" 
-                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
-                />
-              </div>
-              <p className="text-sm sm:text-base text-gray-600 font-poppins">Join our growing community of history enthusiasts</p>
             </div>
 
             {/* Show waitlist form directly on mobile when activated */}

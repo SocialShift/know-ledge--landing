@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const JoinWaitlist = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
-    name: '',
+    email: '',
     device: 'ios' // Default to iOS
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -81,20 +81,20 @@ const JoinWaitlist = ({ onSuccess }) => {
       >
         <div className="space-y-2">
           <label 
-            htmlFor="name"
+            htmlFor="email"
             className="block text-sm font-medium text-blue-900 font-poppins"
           >
-            Name
+            Email
           </label>
           <input
-            type="text"
-            id="name"
-            name="name"
+            type="email"
+            id="email"
+            name="email"
             required
-            value={formData.name}
+            value={formData.email}
             onChange={handleInputChange}
             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-poppins text-gray-800 bg-white/90"
-            placeholder="Enter your name"
+            placeholder="Enter your email address"
           />
         </div>
 
