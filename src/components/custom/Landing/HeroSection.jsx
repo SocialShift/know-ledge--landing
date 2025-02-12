@@ -220,53 +220,50 @@ const HeroSection = () => {
         </AnimatePresence>
       )}
 
-      {/* Main content - Updated responsive padding */}
+      {/* Main content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 min-h-screen relative">
-        <div className="grid md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-start pt-20 sm:pt-24 md:pt-40">
+        {/* Adjusted grid container with better mobile spacing */}
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-center md:pt-32">
           {/* Left side - Text content */}
           <motion.div 
             variants={fadeInUp}
-            className="flex flex-col items-center md:items-start text-center md:text-left md:pl-24"
+            className="flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-24 pt-24 md:pt-0"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6 font-poppins max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-4xl font-bold text-blue-900 mb-4 sm:mb-5 md:mb-6 font-poppins max-w-2xl leading-tight">
               Uncover Histories They Didn't Teach You
             </h1>
             
-            <p className="text-base sm:text-lg text-blue-600 mb-8 md:mb-10 font-poppins max-w-xl">
-              Your Gateway to Untold Stories Through Interactive Learning
-            </p>
-
-            <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
-              <p className="text-lg md:text-xl text-gray-700 font-poppins">
-                Question. Learn. Evolve. 📚 Experience History Like Never Before
+            <div className="space-y-3 md:space-y-4 mb-5 md:mb-8">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-poppins">
+                Question. Learn. Evolve. <br /> 📚 Experience History Like Never Before
               </p>
               
               <div className="max-w-xl">
-                <p className="text-base text-gray-600 leading-relaxed mb-4">
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed mb-4">
                   Know[ledge] is a revolutionary platform that reveals overlooked histories of race, gender, 
                   sexual orientation, and ethnicity through immersive storytelling and interactive learning.
                 </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="text-green-500 text-lg">✅</span>
+                <ul className="space-y-2 sm:space-y-3">
+                  <li className="flex items-start gap-2 text-gray-600 text-sm sm:text-base">
+                    <span className="text-green-500 text-lg sm:text-xl mt-0.5">✅</span>
                     <span>Bite-sized stories that challenge the status quo</span>
                   </li>
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="text-green-500 text-lg">✅</span>
+                  <li className="flex items-start gap-2 text-gray-600 text-sm sm:text-base">
+                    <span className="text-green-500 text-lg sm:text-xl mt-0.5">✅</span>
                     <span>Gamified quizzes & interactive timelines</span>
                   </li>
-                  <li className="flex items-start gap-2 text-gray-600">
-                    <span className="text-green-500 text-lg">✅</span>
+                  <li className="flex items-start gap-2 text-gray-600 text-sm sm:text-base">
+                    <span className="text-green-500 text-lg sm:text-xl mt-0.5">✅</span>
                     <span>Personalized learning paths powered by AI</span>
                   </li>
                 </ul>
-                
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-10">
-              <button className="px-6 sm:px-8 py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-sm sm:text-base">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+            {/* Buttons container with better mobile layout */}
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
+              <button className="px-5 sm:px-8 py-3 sm:py-4 bg-amber-500 hover:bg-amber-600 text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-sm sm:text-base">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                 </svg>
                 Download iOS App
@@ -277,14 +274,14 @@ const HeroSection = () => {
                   isJoined 
                     ? 'bg-green-500 hover:bg-green-600' 
                     : 'bg-green-500 hover:bg-green-600'
-                } text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-sm sm:text-base relative`}
+                } text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-base relative`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {isJoined ? (
                   <>
                     <motion.svg
-                      className="w-5 h-5 sm:w-6 sm:h-6"
+                      className="w-6 h-6 sm:w-7 sm:h-7"
                       viewBox="0 0 24 24"
                       initial="unchecked"
                       animate="checked"
@@ -303,7 +300,7 @@ const HeroSection = () => {
                   </>
                 ) : (
                   <>
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
                     Join Waitlist
@@ -312,21 +309,21 @@ const HeroSection = () => {
               </motion.button>
             </div>
 
-            {/* Show waitlist form directly on mobile when activated */}
+            {/* Mobile waitlist form with better spacing */}
             {isMobile && showWaitlistForm && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="w-full mt-8"
+                className="w-full mt-6 sm:mt-8"
               >
                 <JoinWaitlist onSuccess={handleWaitlistSuccess} />
               </motion.div>
             )}
           </motion.div>
 
-          {/* Right side - iPhone mockup */}
-          <div className="relative flex items-start justify-center md:justify-center h-[500px] sm:h-[550px] md:h-auto pl-0 md:pl-8 -mt-6 sm:mt-0">
+          {/* Right side - iPhone mockup with optimized mobile view */}
+          <div className="relative flex items-center justify-center md:justify-center h-[450px] sm:h-[500px] md:h-auto pl-0 md:pl-8 mt-4 sm:mt-6 md:mt-0">
             {/* Background circle for iPhone - Simplified animation on mobile */}
             <div className="absolute top-1/2 right-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] translate-x-1/2 -translate-y-1/2">
               <motion.div 

@@ -20,8 +20,8 @@ export default function Home() {
       <HeroSection />
       <Features priority />
       <Pills />
-      <Promo />
-      <About />
+      {/* <Promo />
+      <About /> */}
       <Faq />
       <ScrollToTop />
       {/* <Testimonials /> */}

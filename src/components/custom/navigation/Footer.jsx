@@ -41,7 +41,7 @@ const Footer = () => {
                 />
               </div>
               <span className="text-xl font-bold text-blue-900 font-poppins tracking-tight">
-                know<span className="text-blue-600">[ledge]</span>
+                <span className="text-blue-600">Know[ledge]</span>
               </span>
             </Link>
             <p className="text-gray-600 font-poppins text-sm leading-relaxed max-w-md">

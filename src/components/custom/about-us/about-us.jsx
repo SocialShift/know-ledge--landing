@@ -1,8 +1,31 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import JoinWaitlist from '@/components/custom/forms/JoinWaitlist'
 
 const AboutUs = () => {
+  const [showWaitlistForm, setShowWaitlistForm] = useState(false)
+  const [isJoined, setIsJoined] = useState(false)
+
+  const handleWaitlistSuccess = () => {
+    setShowWaitlistForm(false)
+    setIsJoined(true)
+  }
+
+  const handleShowWaitlist = () => {
+    setShowWaitlistForm(true)
+    // Smooth scroll to the form
+    setTimeout(() => {
+      const formElement = document.getElementById('waitlist-form')
+      if (formElement) {
+        formElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        })
+      }
+    }, 100)
+  }
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -30,21 +53,21 @@ const AboutUs = () => {
   return (
     <div className="bg-slate-50 font-poppins">
       {/* About Us Section - Full height */}
-      <section className="min-h-screen flex flex-col justify-center pt-40 pb-20">
+      <section className="min-h-screen flex flex-col justify-center pt-32 sm:pt-36 md:pt-40 pb-20">
         <motion.div 
           {...fadeIn}
           className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
         >
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-16">
-              <span className="text-lg font-semibold text-blue-600 mb-4 block font-poppins">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="mb-12 sm:mb-16">
+              <span className="text-base sm:text-lg font-semibold text-blue-600 mb-3 sm:mb-4 block font-poppins tracking-wide">
                 Our Mission
               </span>
-              <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-12 font-poppins">
-                History. Reclaimed.
+              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-8 sm:mb-12 font-poppins leading-tight">
+                History Reclaimed
               </h2>
             </div>
-            <div className="space-y-8 text-lg md:text-xl text-slate-700 leading-relaxed font-poppins">
+            <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed font-poppins max-w-3xl mx-auto">
               <p>
                 The stories of women, people of color, LGBTQ+ pioneers, and changemakers have too often been erased, distorted, or reduced to footnotes.
               </p>
@@ -54,6 +77,51 @@ const AboutUs = () => {
               <p>
                 Using AI-powered storytelling, gamification, and interactive experiences, we bring untold narratives to life—because understanding the full picture of history is the first step toward a more informed and just world.
               </p>
+            </div>
+            
+            {/* Add CTA section */}
+            <div className="mt-16 sm:mt-20">
+              <div className="flex flex-col items-center space-y-6">
+                <motion.button
+                  onClick={handleShowWaitlist}
+                  className={`px-8 py-4 ${
+                    isJoined 
+                      ? 'bg-green-500 hover:bg-green-600' 
+                      : 'bg-blue-600 hover:bg-blue-700'
+                  } text-white rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 font-poppins text-lg shadow-lg shadow-blue-500/20 hover:scale-105`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {isJoined ? (
+                    <>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      Joined Successfully
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      Join the Movement
+                    </>
+                  )}
+                </motion.button>
+                
+                {/* Waitlist Form */}
+                {showWaitlistForm && (
+                  <motion.div
+                    id="waitlist-form"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    className="w-full max-w-md mt-6"
+                  >
+                    <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+                  </motion.div>
+                )}
+              </div>
             </div>
           </div>
         </motion.div>
