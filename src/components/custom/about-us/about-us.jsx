@@ -135,9 +135,9 @@ const AboutUs = () => {
         >
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-20">
-              <span className="text-lg font-semibold text-blue-600 mb-4 block font-poppins">
+              {/* <span className="text-lg font-semibold text-blue-600 mb-4 block font-poppins">
                 The Time is Now
-              </span>
+              </span> */}
               <h2 className="text-4xl md:text-6xl font-bold text-slate-900 font-poppins">
                 Why Now?
               </h2>

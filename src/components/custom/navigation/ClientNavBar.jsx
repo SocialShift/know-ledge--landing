@@ -72,16 +72,16 @@ const ClientNavBar = () => {
   const downloadButtonClass = 'bg-blue-600 hover:bg-blue-700 text-white'
 
   return (
-    <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[99%] max-w-[90rem] z-50 transition-transform duration-300 ${
+    <nav className={`fixed top-2 sm:top-6 left-1/2 -translate-x-1/2 w-[95%] sm:w-[99%] max-w-[90rem] z-50 transition-transform duration-300 ${
       visible ? 'translate-y-0' : '-translate-y-32'
     }`}>
       <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-100/90 via-sky-200/90 to-sky-100/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-sky-200/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-100/90 via-sky-200/90 to-sky-100/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg shadow-sky-200/20" />
         
-        <div className="relative px-4 md:px-10 lg:px-16">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2 md:gap-5">
-              <div className="w-14 h-6 relative flex items-center">
+        <div className="relative px-3 sm:px-4 md:px-10 lg:px-16">
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            <Link href="/" className="flex items-center gap-1 sm:gap-2 md:gap-5">
+              <div className="w-10 sm:w-14 h-6 relative flex items-center">
                 <Image
                   src="/logo/Logo.svg"
                   alt="knowledge logo"
@@ -91,7 +91,7 @@ const ClientNavBar = () => {
                   priority
                 />
               </div>
-              <span className={`text-xl md:text-2xl font-bold font-poppins tracking-tight text-blue-900`}>
+              <span className={`text-lg sm:text-xl md:text-2xl font-bold font-poppins tracking-tight text-blue-900`}>
                 <span className="text-blue-600">Know[ledge]</span>
               </span>
             </Link>
@@ -150,20 +150,20 @@ const ClientNavBar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg overflow-hidden"
+            className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden"
           >
-            <div className="p-4 space-y-3">
+            <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavigation(e, item.href)}
-                  className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-poppins text-sm"
+                  className="block px-4 py-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-poppins text-sm"
                 >
                   {item.label}
                 </a>
               ))}
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors font-poppins mt-4">
+              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors font-poppins mt-4">
                 Download
               </button>
             </div>

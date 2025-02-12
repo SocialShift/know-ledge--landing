@@ -97,7 +97,7 @@ const Features = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-b from-blue-950 to-slate-900 py-8 md:py-16 min-h-screen font-poppins">
+    <section className="relative bg-gradient-to-b from-blue-950 to-slate-900 py-6 sm:py-8 md:py-16 min-h-screen font-poppins">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-50 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]">
         <div className="absolute inset-0 backdrop-blur-[2px] bg-blue-500/5"></div>
@@ -105,12 +105,11 @@ const Features = () => {
 
       <div className="relative mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          
-          <div className="flex justify-center gap-6 mt-6">
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 mt-6">
             <button
               onClick={() => handleTabChange('why-join')}
-              className={`px-16 py-5 text-2xl font-medium rounded-full transition-all duration-300 min-w-[200px] ${
+              className={`px-6 sm:px-16 py-3 sm:py-5 text-xl sm:text-2xl font-medium rounded-full transition-all duration-300 min-w-[160px] sm:min-w-[200px] ${
                 activeTab === 'why-join'
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                   : 'text-blue-200 hover:text-white border border-blue-400/30 hover:border-blue-400'
@@ -120,7 +119,7 @@ const Features = () => {
             </button>
             <button
               onClick={() => handleTabChange('features')}
-              className={`px-16 py-5 text-2xl font-medium rounded-full transition-all duration-300 min-w-[200px] ${
+              className={`px-6 sm:px-16 py-3 sm:py-5 text-xl sm:text-2xl font-medium rounded-full transition-all duration-300 min-w-[160px] sm:min-w-[200px] ${
                 activeTab === 'features'
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                   : 'text-blue-200 hover:text-white border border-blue-400/30 hover:border-blue-400'
@@ -139,7 +138,7 @@ const Features = () => {
           transition={{ duration: 0.5 }}
         >
           {activeTab === 'why-join' ? (
-            <div className="space-y-28">
+            <div className="space-y-16 sm:space-y-28">
               {whyJoinReasons.map((reason, index) => (
                 <motion.div
                   key={index}
@@ -148,20 +147,19 @@ const Features = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`relative ${index % 2 === 0 ? 'text-left' : 'text-right'}`}
                 >
-                  <div className={`flex items-center gap-10 ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                    {index % 2 === 0 && <div className="text-blue-400 w-14 h-14">{reason.icon}</div>}
-                    <div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">{reason.title}</h3>
-                      <p className="text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed">{reason.description}</p>
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'sm:flex-row items-start' : 'sm:flex-row-reverse items-end'} sm:items-center gap-4 sm:gap-10`}>
+                    <div className="text-blue-400 w-12 sm:w-14 h-12 sm:h-14 mx-auto sm:mx-0">{reason.icon}</div>
+                    <div className="text-center sm:text-left">
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">{reason.title}</h3>
+                      <p className="text-base sm:text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed">{reason.description}</p>
                     </div>
-                    {index % 2 !== 0 && <div className="text-blue-400 w-14 h-14">{reason.icon}</div>}
                   </div>
                   <div className="absolute top-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
                 </motion.div>
               ))}
             </div>
           ) : (
-            <div className="space-y-28">
+            <div className="space-y-16 sm:space-y-28">
               {keyFeatures.map((feature, index) => (
                 <motion.div
                   key={index}
@@ -170,13 +168,12 @@ const Features = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`relative ${index % 2 === 0 ? 'text-left' : 'text-right'}`}
                 >
-                  <div className={`flex items-center gap-10 ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                    {index % 2 === 0 && <div className="text-blue-400 w-14 h-14">{feature.icon}</div>}
-                    <div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">{feature.title}</h3>
-                      <p className="text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed">{feature.description}</p>
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'sm:flex-row items-start' : 'sm:flex-row-reverse items-end'} sm:items-center gap-4 sm:gap-10`}>
+                    <div className="text-blue-400 w-12 sm:w-14 h-12 sm:h-14 mx-auto sm:mx-0">{feature.icon}</div>
+                    <div className="text-center sm:text-left">
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">{feature.title}</h3>
+                      <p className="text-base sm:text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed">{feature.description}</p>
                     </div>
-                    {index % 2 !== 0 && <div className="text-blue-400 w-14 h-14">{feature.icon}</div>}
                   </div>
                   <div className="absolute top-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
                 </motion.div>
