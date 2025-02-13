@@ -57,29 +57,28 @@ const HeroSection = () => {
     }
   }
 
-  const handleJoinWaitlist = () => {
+  const handleJoinWaitlist = (e) => {
+    e.preventDefault(); // Prevent default behavior
     if (!isJoined) {
       if (isMobile) {
-        // For mobile, toggle the form visibility
-        setShowWaitlistForm(!showWaitlistForm)
-        // Smooth scroll to the form after it's shown
+        setShowWaitlistForm(!showWaitlistForm);
+        // Don't scroll immediately, wait for form to render
         if (!showWaitlistForm) {
           setTimeout(() => {
-            const formElement = document.getElementById('mobile-waitlist-form')
+            const formElement = document.getElementById('mobile-waitlist-form');
             if (formElement) {
-              formElement.scrollIntoView({ 
+              formElement.scrollIntoView({
                 behavior: 'smooth',
-                block: 'center'
-              })
+                block: 'nearest'
+              });
             }
-          }, 100)
+          }, 300); // Increased timeout for better reliability
         }
       } else {
-        // For desktop, show modal
-        setShowWaitlistForm(true)
+        setShowWaitlistForm(true);
       }
     }
-  }
+  };
 
   const handleWaitlistSuccess = () => {
     setShowWaitlistForm(false)
@@ -198,7 +197,7 @@ const HeroSection = () => {
           {/* Left side - Text content */}
           <motion.div 
             variants={fadeInUp}
-            className="flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-24 pt-24 md:pt-0"
+            className="flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-24 pt-24 md:pt-0 relative"
           >
             <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-4xl font-bold text-blue-900 mb-4 sm:mb-5 md:mb-6 font-poppins max-w-2xl leading-tight">
               Uncover Histories They Didn't Teach You
@@ -280,27 +279,28 @@ const HeroSection = () => {
               </motion.button>
             </div>
 
-            {/* Mobile Waitlist Form */}
+            {/* Mobile Waitlist Form - Updated structure */}
             {isMobile && (
-              <AnimatePresence>
-                {showWaitlistForm && (
-                  <motion.div
-                    id="mobile-waitlist-form"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ 
-                      opacity: 1,
-                      height: 'auto'
-                    }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="w-full mt-6 overflow-hidden"
-                  >
-                    <div 
-                      className="bg-white rounded-xl p-4"
-                      onClick={(e) => e.stopPropagation()}
+              <div className="w-full">
+                <AnimatePresence>
+                  {showWaitlistForm && (
+                    <motion.div
+                      id="mobile-waitlist-form"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ 
+                        opacity: 1,
+                        height: 'auto'
+                      }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="w-full mt-6"
+                      style={{ position: 'relative', zIndex: 50 }}
                     >
                       <div 
-                        className="relative"
-                        onClick={(e) => e.stopPropagation()}
+                        className="bg-white rounded-xl p-4 shadow-lg"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
                       >
                         <JoinWaitlist 
                           onSuccess={handleWaitlistSuccess}
@@ -310,15 +310,18 @@ const HeroSection = () => {
                           }}
                         />
                       </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             )}
           </motion.div>
 
           {/* Right side - iPhone mockup with optimized mobile view */}
-          <div className="relative flex items-center justify-center md:justify-center h-[450px] sm:h-[500px] md:h-auto pl-0 md:pl-8 mt-4 sm:mt-6 md:mt-0">
+          <div 
+            className="relative flex items-center justify-center md:justify-center h-[450px] sm:h-[500px] md:h-auto pl-0 md:pl-8 mt-4 sm:mt-6 md:mt-0"
+            style={{ zIndex: isMobile && showWaitlistForm ? 40 : 45 }} // Lower z-index when form is shown
+          >
             {/* Background circle for iPhone - Simplified animation on mobile */}
             <div className="absolute top-1/2 right-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] translate-x-1/2 -translate-y-1/2">
               <motion.div 
