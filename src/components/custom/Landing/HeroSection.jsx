@@ -280,7 +280,7 @@ const HeroSection = () => {
               </motion.button>
             </div>
 
-            {/* Mobile Waitlist Form - Updated to prevent auto-closing */}
+            {/* Mobile Waitlist Form */}
             {isMobile && (
               <AnimatePresence>
                 {showWaitlistForm && (
@@ -293,13 +293,23 @@ const HeroSection = () => {
                     }}
                     exit={{ opacity: 0, height: 0 }}
                     className="w-full mt-6 overflow-hidden"
-                    onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="bg-white rounded-xl p-4">
-                      <JoinWaitlist 
-                        onSuccess={handleWaitlistSuccess}
+                    <div 
+                      className="bg-white rounded-xl p-4"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div 
+                        className="relative"
                         onClick={(e) => e.stopPropagation()}
-                      />
+                      >
+                        <JoinWaitlist 
+                          onSuccess={handleWaitlistSuccess}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }}
+                        />
+                      </div>
                     </div>
                   </motion.div>
                 )}
