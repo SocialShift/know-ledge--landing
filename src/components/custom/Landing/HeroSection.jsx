@@ -57,28 +57,12 @@ const HeroSection = () => {
     }
   }
 
-  const handleJoinWaitlist = (e) => {
-    e.preventDefault(); // Prevent default behavior
+  const handleJoinWaitlist = () => {
     if (!isJoined) {
-      if (isMobile) {
-        setShowWaitlistForm(!showWaitlistForm);
-        // Don't scroll immediately, wait for form to render
-        if (!showWaitlistForm) {
-          setTimeout(() => {
-            const formElement = document.getElementById('mobile-waitlist-form');
-            if (formElement) {
-              formElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest'
-              });
-            }
-          }, 300); // Increased timeout for better reliability
-        }
-      } else {
-        setShowWaitlistForm(true);
-      }
+      // Always show modal for both mobile and desktop
+      setShowWaitlistForm(true)
     }
-  };
+  }
 
   const handleWaitlistSuccess = () => {
     setShowWaitlistForm(false)
@@ -197,7 +181,7 @@ const HeroSection = () => {
           {/* Left side - Text content */}
           <motion.div 
             variants={fadeInUp}
-            className="flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-24 pt-24 md:pt-0 relative"
+            className="flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-24 pt-24 md:pt-0"
           >
             <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-4xl font-bold text-blue-900 mb-4 sm:mb-5 md:mb-6 font-poppins max-w-2xl leading-tight">
               Uncover Histories They Didn't Teach You
@@ -278,50 +262,10 @@ const HeroSection = () => {
                 )}
               </motion.button>
             </div>
-
-            {/* Mobile Waitlist Form - Updated structure */}
-            {isMobile && (
-              <div className="w-full">
-                <AnimatePresence>
-                  {showWaitlistForm && (
-                    <motion.div
-                      id="mobile-waitlist-form"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ 
-                        opacity: 1,
-                        height: 'auto'
-                      }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="w-full mt-6"
-                      style={{ position: 'relative', zIndex: 50 }}
-                    >
-                      <div 
-                        className="bg-white rounded-xl p-4 shadow-lg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                      >
-                        <JoinWaitlist 
-                          onSuccess={handleWaitlistSuccess}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                          }}
-                        />
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            )}
           </motion.div>
 
           {/* Right side - iPhone mockup with optimized mobile view */}
-          <div 
-            className="relative flex items-center justify-center md:justify-center h-[450px] sm:h-[500px] md:h-auto pl-0 md:pl-8 mt-4 sm:mt-6 md:mt-0"
-            style={{ zIndex: isMobile && showWaitlistForm ? 40 : 45 }} // Lower z-index when form is shown
-          >
+          <div className="relative flex items-center justify-center md:justify-center h-[450px] sm:h-[500px] md:h-auto pl-0 md:pl-8 mt-4 sm:mt-6 md:mt-0">
             {/* Background circle for iPhone - Simplified animation on mobile */}
             <div className="absolute top-1/2 right-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] translate-x-1/2 -translate-y-1/2">
               <motion.div 
@@ -360,46 +304,60 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Desktop Modal - unchanged */}
-      {!isMobile && (
-        <AnimatePresence>
-          {showWaitlistForm && (
-            <>
-              {/* Backdrop */}
+      {/* Universal Modal for both Mobile and Desktop */}
+      <AnimatePresence>
+        {showWaitlistForm && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => !isMobile && setShowWaitlistForm(false)} // Only close on backdrop click for desktop
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+            />
+            
+            {/* Modal Container - Fixed positioning */}
+            <div className="fixed inset-0 flex items-center justify-center z-[70] px-4">
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setShowWaitlistForm(false)}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
-              />
-              
-              {/* Modal Container - Fixed positioning */}
-              <div className="fixed inset-0 flex items-center justify-center z-[70] px-4">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="relative w-full max-w-lg"
+                initial={{ opacity: 0, scale: 0.95, y: isMobile ? "100%" : 0 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  y: 0,
+                  transition: {
+                    duration: 0.3,
+                    ease: "easeOut"
+                  }
+                }}
+                exit={{ 
+                  opacity: 0, 
+                  scale: 0.95, 
+                  y: isMobile ? "100%" : 0,
+                  transition: {
+                    duration: 0.2,
+                    ease: "easeIn"
+                  }
+                }}
+                className={`relative w-full ${isMobile ? 'max-w-full m-4' : 'max-w-lg'}`}
+              >
+                {/* Close button */}
+                <button
+                  onClick={() => setShowWaitlistForm(false)}
+                  className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
                 >
-                  {/* Close button */}
-                  <button
-                    onClick={() => setShowWaitlistForm(false)}
-                    className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
-                  >
-                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  
-                  {/* Waitlist Form */}
-                  <JoinWaitlist onSuccess={handleWaitlistSuccess} />
-                </motion.div>
-              </div>
-            </>
-          )}
-        </AnimatePresence>
-      )}
+                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                
+                {/* Waitlist Form */}
+                <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+              </motion.div>
+            </div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
