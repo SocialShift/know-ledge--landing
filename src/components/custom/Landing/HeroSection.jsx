@@ -60,8 +60,20 @@ const HeroSection = () => {
   const handleJoinWaitlist = () => {
     if (!isJoined) {
       if (isMobile) {
-        // For mobile, show form directly in the page
-        setShowWaitlistForm(true)
+        // For mobile, toggle the form visibility
+        setShowWaitlistForm(!showWaitlistForm)
+        // Smooth scroll to the form after it's shown
+        if (!showWaitlistForm) {
+          setTimeout(() => {
+            const formElement = document.getElementById('mobile-waitlist-form')
+            if (formElement) {
+              formElement.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+              })
+            }
+          }, 100)
+        }
       } else {
         // For desktop, show modal
         setShowWaitlistForm(true)
@@ -179,67 +191,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Add Modal - Only show for desktop */}
-      {!isMobile && (
-        <AnimatePresence>
-          {showWaitlistForm && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setShowWaitlistForm(false)}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
-              />
-              
-              {/* Modal Container - Fixed positioning */}
-              <div className="fixed inset-0 flex items-center justify-center z-[70] px-4">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="relative w-full max-w-lg"
-                >
-                  {/* Close button */}
-                  <button
-                    onClick={() => setShowWaitlistForm(false)}
-                    className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
-                  >
-                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  
-                  {/* Waitlist Form */}
-                  <JoinWaitlist onSuccess={handleWaitlistSuccess} />
-                </motion.div>
-              </div>
-            </>
-          )}
-        </AnimatePresence>
-      )}
-
-      {/* Mobile version */}
-      {isMobile && showWaitlistForm && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          className="fixed inset-0 bg-white z-50 overflow-y-auto pt-16 px-4"
-        >
-          <button
-            onClick={() => setShowWaitlistForm(false)}
-            className="absolute top-4 right-4"
-          >
-            <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <JoinWaitlist onSuccess={handleWaitlistSuccess} />
-        </motion.div>
-      )}
-
       {/* Main content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 min-h-screen relative">
         {/* Adjusted grid container with better mobile spacing */}
@@ -328,6 +279,26 @@ const HeroSection = () => {
                 )}
               </motion.button>
             </div>
+
+            {/* Mobile Waitlist Form - Show below buttons */}
+            {isMobile && (
+              <AnimatePresence>
+                {showWaitlistForm && (
+                  <motion.div
+                    id="mobile-waitlist-form"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ 
+                      opacity: 1,
+                      height: 'auto'
+                    }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="w-full mt-6 overflow-hidden"
+                  >
+                    <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
           </motion.div>
 
           {/* Right side - iPhone mockup with optimized mobile view */}
@@ -369,6 +340,47 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Desktop Modal - unchanged */}
+      {!isMobile && (
+        <AnimatePresence>
+          {showWaitlistForm && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowWaitlistForm(false)}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+              />
+              
+              {/* Modal Container - Fixed positioning */}
+              <div className="fixed inset-0 flex items-center justify-center z-[70] px-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="relative w-full max-w-lg"
+                >
+                  {/* Close button */}
+                  <button
+                    onClick={() => setShowWaitlistForm(false)}
+                    className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
+                  >
+                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  
+                  {/* Waitlist Form */}
+                  <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+                </motion.div>
+              </div>
+            </>
+          )}
+        </AnimatePresence>
+      )}
     </div>
   )
 }
