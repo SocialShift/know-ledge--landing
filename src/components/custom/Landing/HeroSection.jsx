@@ -1,106 +1,114 @@
 "use client"
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback, memo } from 'react'
 import JoinWaitlist from '@/components/custom/forms/JoinWaitlist'
 
 const HeroSection = () => {
-  const [isJoined, setIsJoined] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [showWaitlistForm, setShowWaitlistForm] = useState(false)
+  // Memoize state to reduce re-renders
+  const [state, setState] = useState({
+    isJoined: false,
+    isMobile: false,
+    showWaitlistForm: false
+  });
 
-  // Handle window resize
+  // Optimize resize handler with debounce
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
-      // Close form if switching to mobile
-      if (window.innerWidth <= 768) {
-        setShowWaitlistForm(false)
-      }
-    }
+    const handleResize = debounce(() => {
+      const mobile = window.innerWidth <= 768;
+      setState(prev => ({
+        ...prev,
+        isMobile: mobile
+      }));
+    }, 100);
     
     // Set initial value
-    handleResize()
+    handleResize();
     
-    // Add event listener
-    window.addEventListener('resize', handleResize)
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    window.addEventListener('resize', handleResize);
+    return () => {
+      handleResize.cancel();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
-  }
-
-  // SVG variants for tick animation
-  const tickVariants = {
-    checked: {
-      pathLength: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    },
-    unchecked: {
-      pathLength: 0,
-      opacity: 0
-    }
-  }
-
-  const handleJoinWaitlist = () => {
-    if (!isJoined) {
-      // Always show modal for both mobile and desktop
-      setShowWaitlistForm(true)
-    }
-  }
-
-  const handleWaitlistSuccess = () => {
-    setShowWaitlistForm(false)
-    setIsJoined(true)
-  }
-
-  // Optimize iPhone component
-  const IPhone = ({ className, scale, rotate, opacity, zIndex }) => (
-    <motion.div 
-      className={`relative ${className}`}
-      style={{ zIndex }}
-      initial={false}
-      animate={{ 
-        opacity: opacity, 
-        scale: isMobile ? 0.85 : scale,
-        rotate: isMobile ? 0 : rotate,
+  // Memoize animation variants
+  const animations = useMemo(() => ({
+    fadeInUp: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { 
+        opacity: 1, 
+        y: 0,
         transition: {
-          duration: 0.3,
+          duration: 0.5,
           ease: "easeOut"
         }
-      }}
-    >
-      <div className="absolute inset-0 bg-gray-900 rounded-[3rem] shadow-2xl" />
-      <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
-        <div className="relative w-full h-full">
-          <Image
-            src="/images/hero/pillhero.png"
-            alt="know[ledge] app interface"
-            fill
-            sizes="(max-width: 768px) 280px, (max-width: 1200px) 320px, 320px"
-            className="object-cover"
-            priority
-          />
+      }
+    },
+    tickVariants: {
+      checked: {
+        pathLength: 1,
+        opacity: 1,
+        transition: { duration: 0.3, ease: "easeOut" }
+      },
+      unchecked: {
+        pathLength: 0,
+        opacity: 0
+      }
+    }
+  }), []);
+
+  // Optimize handlers
+  const handleJoinWaitlist = useCallback(() => {
+    if (!state.isJoined) {
+      setState(prev => ({ ...prev, showWaitlistForm: true }));
+    }
+  }, [state.isJoined]);
+
+  const handleWaitlistSuccess = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      showWaitlistForm: false,
+      isJoined: true
+    }));
+  }, []);
+
+  const handleCloseModal = useCallback((e) => {
+    e?.stopPropagation();
+    setState(prev => ({ ...prev, showWaitlistForm: false }));
+  }, []);
+
+  // Memoize IPhone component
+  const IPhone = useMemo(() => {
+    return ({ className, scale, rotate, opacity, zIndex }) => (
+      <motion.div 
+        className={`relative ${className}`}
+        style={{ zIndex }}
+        initial={false}
+        animate={{ 
+          opacity, 
+          scale: state.isMobile ? 0.85 : scale,
+          rotate: state.isMobile ? 0 : rotate
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
+        <div className="absolute inset-0 bg-gray-900 rounded-[3rem] shadow-2xl" />
+        <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
+          <div className="relative w-full h-full">
+            <Image
+              src="/images/hero/pillhero.png"
+              alt="know[ledge] app interface"
+              fill
+              sizes="(max-width: 768px) 280px, (max-width: 1200px) 320px, 320px"
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
-      </div>
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
-    </motion.div>
-  );
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
+      </motion.div>
+    );
+  }, [state.isMobile]);
 
   return (
     <div className="min-h-[100vh] md:min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
@@ -180,7 +188,7 @@ const HeroSection = () => {
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-center md:pt-32">
           {/* Left side - Text content */}
           <motion.div 
-            variants={fadeInUp}
+            variants={animations.fadeInUp}
             className="flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-24 pt-24 md:pt-0"
           >
             <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-4xl font-bold text-blue-900 mb-4 sm:mb-5 md:mb-6 font-poppins max-w-2xl leading-tight">
@@ -225,14 +233,14 @@ const HeroSection = () => {
               <motion.button
                 onClick={handleJoinWaitlist}
                 className={`px-6 sm:px-8 py-3 sm:py-4 ${
-                  isJoined 
+                  state.isJoined 
                     ? 'bg-green-500 hover:bg-green-600' 
                     : 'bg-green-500 hover:bg-green-600'
                 } text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-base relative`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isJoined ? (
+                {state.isJoined ? (
                   <>
                     <motion.svg
                       className="w-6 h-6 sm:w-7 sm:h-7"
@@ -247,7 +255,7 @@ const HeroSection = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         d="M20 6L9 17l-5-5"
-                        variants={tickVariants}
+                        variants={animations.tickVariants}
                       />
                     </motion.svg>
                     Joined Successfully
@@ -271,7 +279,7 @@ const HeroSection = () => {
               <motion.div 
                 className="w-full h-full bg-gradient-to-br from-blue-200/30 via-blue-300/40 to-blue-400/30 rounded-full blur-2xl"
                 animate={{ 
-                  scale: isMobile ? [1, 1.02, 1] : [1, 1.05, 1],
+                  scale: state.isMobile ? [1, 1.02, 1] : [1, 1.05, 1],
                   opacity: [0.4, 0.5, 0.4] 
                 }}
                 transition={{ 
@@ -304,50 +312,40 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Universal Modal for both Mobile and Desktop */}
-      <AnimatePresence>
-        {showWaitlistForm && (
+      {/* Optimized Modal */}
+      <AnimatePresence mode="wait">
+        {state.showWaitlistForm && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => !isMobile && setShowWaitlistForm(false)}
+              onClick={() => !state.isMobile && handleCloseModal()}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
             />
             
-            {/* Modal Container - Fixed positioning */}
-            <div className="fixed inset-0 flex items-center justify-center z-[70] px-4">
+            <div className="fixed inset-0 flex items-center justify-center z-[70] px-4" onClick={(e) => e.stopPropagation()}>
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: isMobile ? "100%" : 0 }}
+                initial={{ opacity: 0, scale: 0.95, y: state.isMobile ? "100%" : 0 }}
                 animate={{ 
                   opacity: 1, 
                   scale: 1, 
                   y: 0,
-                  transition: {
-                    duration: 0.3,
-                    ease: "easeOut"
-                  }
                 }}
                 exit={{ 
                   opacity: 0, 
                   scale: 0.95, 
-                  y: isMobile ? "100%" : 0,
-                  transition: {
-                    duration: 0.2,
-                    ease: "easeIn"
-                  }
+                  y: state.isMobile ? "100%" : 0,
                 }}
-                onClick={(e) => e.stopPropagation()}
-                className={`relative w-full ${isMobile ? 'max-w-full m-4' : 'max-w-lg'}`}
+                transition={{
+                  duration: 0.2,
+                  ease: "easeOut"
+                }}
+                className={`relative w-full ${state.isMobile ? 'max-w-full m-4' : 'max-w-lg'}`}
               >
                 {/* Close button */}
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowWaitlistForm(false);
-                  }}
+                  onClick={handleCloseModal}
                   className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
                 >
                   <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -356,7 +354,7 @@ const HeroSection = () => {
                 </button>
                 
                 {/* Waitlist Form */}
-                <div onClick={(e) => e.stopPropagation()}>
+                <div className="modal-content">
                   <JoinWaitlist onSuccess={handleWaitlistSuccess} />
                 </div>
               </motion.div>
@@ -368,4 +366,16 @@ const HeroSection = () => {
   )
 }
 
-export default HeroSection
+// Utility function for debouncing
+function debounce(func, wait) {
+  let timeout;
+  const debouncedFn = function(...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+  debouncedFn.cancel = () => clearTimeout(timeout);
+  return debouncedFn;
+}
+
+export default memo(HeroSection)
