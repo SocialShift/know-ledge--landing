@@ -313,7 +313,7 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => !isMobile && setShowWaitlistForm(false)} // Only close on backdrop click for desktop
+              onClick={() => !isMobile && setShowWaitlistForm(false)}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
             />
             
@@ -339,11 +339,15 @@ const HeroSection = () => {
                     ease: "easeIn"
                   }
                 }}
+                onClick={(e) => e.stopPropagation()}
                 className={`relative w-full ${isMobile ? 'max-w-full m-4' : 'max-w-lg'}`}
               >
                 {/* Close button */}
                 <button
-                  onClick={() => setShowWaitlistForm(false)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowWaitlistForm(false);
+                  }}
                   className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
                 >
                   <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -352,7 +356,9 @@ const HeroSection = () => {
                 </button>
                 
                 {/* Waitlist Form */}
-                <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+                <div onClick={(e) => e.stopPropagation()}>
+                  <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+                </div>
               </motion.div>
             </div>
           </>
