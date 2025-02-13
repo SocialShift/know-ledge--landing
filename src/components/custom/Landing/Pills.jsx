@@ -1,19 +1,32 @@
 "use client"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 const Pills = () => {
   const containerRef = useRef(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Add mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   })
 
-  // Add new transform values for 3D effect
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1.1])
-  const rotateX = useTransform(scrollYProgress, [0, 1], [5, 0])
-  const y = useTransform(scrollYProgress, [0, 1], [20, -20])
+  // Conditional transform values based on device
+  const scale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [0.95, 1.1])
+  const rotateX = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [5, 0])
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [20, -20])
 
   // Add back the progress transforms for pills
   const progress1 = useTransform(scrollYProgress, [0, 0.33], ["0%", "0%"])

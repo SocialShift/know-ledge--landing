@@ -5,32 +5,23 @@ import { useState, useEffect, useMemo, useCallback, memo } from 'react'
 import JoinWaitlist from '@/components/custom/forms/JoinWaitlist'
 
 const HeroSection = () => {
-  // Memoize state to reduce re-renders
+  const [isMobile, setIsMobile] = useState(false)
   const [state, setState] = useState({
     isJoined: false,
-    isMobile: false,
     showWaitlistForm: false
-  });
+  })
 
-  // Optimize resize handler with debounce
+  // Detect mobile devices
   useEffect(() => {
-    const handleResize = debounce(() => {
-      const mobile = window.innerWidth <= 768;
-      setState(prev => ({
-        ...prev,
-        isMobile: mobile
-      }));
-    }, 100);
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+    }
     
-    // Set initial value
-    handleResize();
-    
-    window.addEventListener('resize', handleResize);
-    return () => {
-      handleResize.cancel();
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Memoize animation variants
   const animations = useMemo(() => ({
@@ -87,8 +78,8 @@ const HeroSection = () => {
         initial={false}
         animate={{ 
           opacity, 
-          scale: state.isMobile ? 0.85 : scale,
-          rotate: state.isMobile ? 0 : rotate
+          scale: isMobile ? 0.85 : scale,
+          rotate: isMobile ? 0 : rotate
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
@@ -108,52 +99,59 @@ const HeroSection = () => {
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
       </motion.div>
     );
-  }, [state.isMobile]);
+  }, [isMobile]);
 
-  return (
-    <div className="min-h-[100vh] md:min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
-      {/* Add decorative curve background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <svg
-          className="absolute w-full h-[120%] top-0 left-0 transform rotate-180"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          fill="none"
-        >
-          <path
-            d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            fill="url(#gradient)"
-            className="opacity-20"
+  // Modify the background animation section
+  const BackgroundAnimation = () => {
+    if (isMobile) {
+      return (
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-100/50 blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-50/50 blur-3xl" />
+        </div>
+      )
+    }
+
+    return (
+      <>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <svg
+            className="absolute w-full h-[120%] top-0 left-0 transform rotate-180"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+            fill="none"
           >
-            <animate
-              attributeName="d"
-              dur="10s"
-              repeatCount="indefinite"
-              values="
-                M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,112C672,107,768,149,864,165.3C960,181,1056,171,1152,165.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            />
-          </path>
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style={{ stopColor: '#3B82F6' }} />
-              <stop offset="50%" style={{ stopColor: '#2563EB' }} />
-              <stop offset="100%" style={{ stopColor: '#1D4ED8' }} />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+            <path
+              d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              fill="url(#gradient)"
+              className="opacity-20"
+            >
+              <animate
+                attributeName="d"
+                dur="10s"
+                repeatCount="indefinite"
+                values="
+                  M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                  M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,112C672,107,768,149,864,165.3C960,181,1056,171,1152,165.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                  M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,90.7C960,85,1056,139,1152,149.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              />
+            </path>
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style={{ stopColor: '#3B82F6' }} />
+                <stop offset="50%" style={{ stopColor: '#2563EB' }} />
+                <stop offset="100%" style={{ stopColor: '#1D4ED8' }} />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
 
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-100/50 blur-3xl" />
-        <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-50/50 blur-3xl" />
-      </div>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-100/50 blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-blue-50/50 blur-3xl" />
+        </div>
 
-      {/* Semi-circle decoration */}
-      <div className="absolute right-0 top-0 w-[1500px] h-[1500px] -translate-y-1/4 translate-x-1/4">
-        <div className="relative w-full h-full">
+        <div className="absolute right-0 top-0 w-[1500px] h-[1500px] -translate-y-1/4 translate-x-1/4">
           {/* Large semi-circle background glow */}
           <motion.div 
             className="absolute inset-0 bg-gradient-to-br from-blue-200/30 via-blue-300/20 to-blue-100/10 rounded-full blur-3xl"
@@ -180,8 +178,14 @@ const HeroSection = () => {
             />
           </svg>
         </div>
-      </div>
+      </>
+    )
+  }
 
+  return (
+    <div className="min-h-[100vh] md:min-h-[110vh] bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
+      <BackgroundAnimation />
+      
       {/* Main content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 min-h-screen relative">
         {/* Adjusted grid container with better mobile spacing */}
@@ -279,7 +283,7 @@ const HeroSection = () => {
               <motion.div 
                 className="w-full h-full bg-gradient-to-br from-blue-200/30 via-blue-300/40 to-blue-400/30 rounded-full blur-2xl"
                 animate={{ 
-                  scale: state.isMobile ? [1, 1.02, 1] : [1, 1.05, 1],
+                  scale: isMobile ? [1, 1.02, 1] : [1, 1.05, 1],
                   opacity: [0.4, 0.5, 0.4] 
                 }}
                 transition={{ 
@@ -320,13 +324,13 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => !state.isMobile && handleCloseModal()}
+              onClick={() => !isMobile && handleCloseModal()}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
             />
             
             <div className="fixed inset-0 flex items-center justify-center z-[70] px-4" onClick={(e) => e.stopPropagation()}>
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: state.isMobile ? "100%" : 0 }}
+                initial={{ opacity: 0, scale: 0.95, y: isMobile ? "100%" : 0 }}
                 animate={{ 
                   opacity: 1, 
                   scale: 1, 
@@ -335,13 +339,13 @@ const HeroSection = () => {
                 exit={{ 
                   opacity: 0, 
                   scale: 0.95, 
-                  y: state.isMobile ? "100%" : 0,
+                  y: isMobile ? "100%" : 0,
                 }}
                 transition={{
                   duration: 0.2,
                   ease: "easeOut"
                 }}
-                className={`relative w-full ${state.isMobile ? 'max-w-full m-4' : 'max-w-lg'}`}
+                className={`relative w-full ${isMobile ? 'max-w-full m-4' : 'max-w-lg'}`}
               >
                 {/* Close button */}
                 <button
@@ -364,18 +368,6 @@ const HeroSection = () => {
       </AnimatePresence>
     </div>
   )
-}
-
-// Utility function for debouncing
-function debounce(func, wait) {
-  let timeout;
-  const debouncedFn = function(...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
-  debouncedFn.cancel = () => clearTimeout(timeout);
-  return debouncedFn;
 }
 
 export default memo(HeroSection)
