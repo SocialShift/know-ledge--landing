@@ -1,55 +1,26 @@
 "use client"
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { useRef, useMemo, memo } from 'react'
+import { useRef } from 'react'
 
 const Pills = () => {
   const containerRef = useRef(null)
-  
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end end"]
   })
 
-  // Move all useTransform calls to the top level
+  // Add new transform values for 3D effect
   const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1.1])
   const rotateX = useTransform(scrollYProgress, [0, 1], [5, 0])
   const y = useTransform(scrollYProgress, [0, 1], [20, -20])
-  
-  // Progress transforms
+
+  // Add back the progress transforms for pills
   const progress1 = useTransform(scrollYProgress, [0, 0.33], ["0%", "0%"])
   const progress2 = useTransform(scrollYProgress, [0.15, 0.33], ["100%", "0%"])
   const progress3 = useTransform(scrollYProgress, [0.5, 0.8], ["100%", "0%"])
 
-  // Text transitions
-  const text1Y = useTransform(scrollYProgress, [0, 0.33], [0, -50])
-  const text1Opacity = useTransform(scrollYProgress, [0, 0.33], [1, 0])
-  
-  const text2Y = useTransform(scrollYProgress, [0.15, 0.33, 0.5, 0.8], [50, 0, 0, -50])
-  const text2Opacity = useTransform(scrollYProgress, [0.15, 0.33, 0.5, 0.8], [0, 1, 1, 0])
-  
-  const text3Y = useTransform(scrollYProgress, [0.5, 0.8], [50, 0])
-  const text3Opacity = useTransform(scrollYProgress, [0.5, 0.8], [0, 1])
-
-  // Memoize the transitions object
-  const textTransitions = useMemo(() => ({
-    text1: { y: text1Y, opacity: text1Opacity },
-    text2: { y: text2Y, opacity: text2Opacity },
-    text3: { y: text3Y, opacity: text3Opacity }
-  }), [text1Y, text1Opacity, text2Y, text2Opacity, text3Y, text3Opacity])
-
-  // Memoize transform values object
-  const transformValues = useMemo(() => ({
-    scale,
-    rotateX,
-    y,
-    progress1,
-    progress2,
-    progress3
-  }), [scale, rotateX, y, progress1, progress2, progress3])
-
-  // Memoize pills data to prevent unnecessary rerenders
-  const pills = useMemo(() => [
+  const pills = [
     {
       title: "For Those Who Want a Fuller Story",
       subtitle: "Built for Curious Minds",
@@ -83,28 +54,26 @@ const Pills = () => {
       leftText: "Every day brings new insights and perspectives to expand your understanding.",
       rightText: "Your journey of discovery never ends - there's always more to learn and explore."
     }
-  ], [])
+  ]
 
-  // Optimize iPhone frame rendering with memo
-  const IPhoneFrame = memo(() => (
-    <>
-      {/* Large Ambient Shadow */}
-      <div className="absolute -inset-4 bg-black/10 blur-2xl rounded-[3rem] transform -rotate-[4deg]" />
-      <div className="absolute -inset-4 bg-black/5 blur-3xl rounded-[3rem] transform rotate-[4deg]" />
-      
-      {/* iPhone Frame */}
-      <div className="absolute inset-0 bg-[#1D1D1F] rounded-[2.5rem] sm:rounded-[2.8rem] shadow-[0_0_20px_rgba(0,0,0,0.2),0_0_40px_rgba(0,0,0,0.1)] transform-gpu">
-        {/* Side Buttons */}
-        <div className="absolute -left-[2px] top-[100px] w-[2px] h-12 bg-[#2A2A2C] rounded-l-lg" />
-        <div className="absolute -left-[2px] top-[150px] w-[2px] h-12 bg-[#2A2A2C] rounded-l-lg" />
-        <div className="absolute -right-[2px] top-[120px] w-[2px] h-16 bg-[#2A2A2C] rounded-r-lg" />
-        
-        {/* Inner Frame Highlight */}
-        <div className="absolute inset-0 rounded-[2.8rem] bg-gradient-to-tr from-[#2A2A2C] via-transparent to-transparent opacity-50" />
-        <div className="absolute inset-0 rounded-[2.8rem] bg-gradient-to-bl from-white/10 via-transparent to-transparent opacity-30" />
-      </div>
-    </>
-  ))
+  // Adjust text transitions to match pill transitions
+  const textTransitions = {
+    // First text section
+    text1: {
+      y: useTransform(scrollYProgress, [0, 0.33], [0, -50]),
+      opacity: useTransform(scrollYProgress, [0, 0.33], [1, 0])
+    },
+    // Second text section
+    text2: {
+      y: useTransform(scrollYProgress, [0.15, 0.33, 0.5, 0.8], [50, 0, 0, -50]),
+      opacity: useTransform(scrollYProgress, [0.15, 0.33, 0.5, 0.8], [0, 1, 1, 0])
+    },
+    // Third text section
+    text3: {
+      y: useTransform(scrollYProgress, [0.5, 0.8], [50, 0]),
+      opacity: useTransform(scrollYProgress, [0.5, 0.8], [0, 1])
+    }
+  }
 
   return (
     <section ref={containerRef} className="relative w-full h-[300vh] bg-gradient-to-b from-slate-900 to-blue-950">
@@ -138,13 +107,27 @@ const Pills = () => {
           {/* Center iPhone Section */}
           <motion.div 
             style={{
-              scale: transformValues.scale,
-              rotateX: transformValues.rotateX,
-              y: transformValues.y,
+              scale,
+              rotateX,
+              y,
             }}
             className="relative w-[280px] sm:w-[300px] h-[560px] sm:h-[600px] mx-auto"
           >
-            <IPhoneFrame />
+            {/* Large Ambient Shadow */}
+            <div className="absolute -inset-4 bg-black/10 blur-2xl rounded-[3rem] transform -rotate-[4deg]" />
+            <div className="absolute -inset-4 bg-black/5 blur-3xl rounded-[3rem] transform rotate-[4deg]" />
+            
+            {/* iPhone Frame - slightly smaller on mobile */}
+            <div className="absolute inset-0 bg-[#1D1D1F] rounded-[2.5rem] sm:rounded-[2.8rem] shadow-[0_0_20px_rgba(0,0,0,0.2),0_0_40px_rgba(0,0,0,0.1)] transform-gpu">
+              {/* Side Buttons */}
+              <div className="absolute -left-[2px] top-[100px] w-[2px] h-12 bg-[#2A2A2C] rounded-l-lg" /> {/* Volume Up */}
+              <div className="absolute -left-[2px] top-[150px] w-[2px] h-12 bg-[#2A2A2C] rounded-l-lg" /> {/* Volume Down */}
+              <div className="absolute -right-[2px] top-[120px] w-[2px] h-16 bg-[#2A2A2C] rounded-r-lg" /> {/* Power */}
+              
+              {/* Inner Frame Highlight - enhanced for 3D look */}
+              <div className="absolute inset-0 rounded-[2.8rem] bg-gradient-to-tr from-[#2A2A2C] via-transparent to-transparent opacity-50" />
+              <div className="absolute inset-0 rounded-[2.8rem] bg-gradient-to-bl from-white/10 via-transparent to-transparent opacity-30" />
+            </div>
 
             {/* Screen Container */}
             <div className="absolute inset-[4px] bg-white rounded-[2.3rem] sm:rounded-[2.6rem] overflow-hidden shadow-inner">
@@ -160,7 +143,7 @@ const Pills = () => {
                   <motion.div
                     key={index}
                     style={{
-                      y: index === 0 ? transformValues.progress1 : index === 1 ? transformValues.progress2 : transformValues.progress3,
+                      y: index === 0 ? progress1 : index === 1 ? progress2 : progress3,
                       position: 'absolute',
                       inset: 0,
                     }}
@@ -226,7 +209,4 @@ const Pills = () => {
   )
 }
 
-// Add display name for better debugging
-Pills.displayName = 'Pills'
-
-export default memo(Pills) // Memoize the entire component
+export default Pills
