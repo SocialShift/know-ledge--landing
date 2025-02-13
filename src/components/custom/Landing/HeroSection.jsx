@@ -190,34 +190,54 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setShowWaitlistForm(false)}
-                className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
               />
               
-              {/* Modal */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg px-4"
-              >
-                {/* Close button */}
-                <button
-                  onClick={() => setShowWaitlistForm(false)}
-                  className="absolute -top-12 right-4 text-white/80 hover:text-white"
+              {/* Modal Container - Fixed positioning */}
+              <div className="fixed inset-0 flex items-center justify-center z-[70] px-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="relative w-full max-w-lg"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-
-                {/* Waitlist Form */}
-                <div className="relative">
+                  {/* Close button */}
+                  <button
+                    onClick={() => setShowWaitlistForm(false)}
+                    className="absolute -top-4 -right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
+                  >
+                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  
+                  {/* Waitlist Form */}
                   <JoinWaitlist onSuccess={handleWaitlistSuccess} />
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </>
           )}
         </AnimatePresence>
+      )}
+
+      {/* Mobile version */}
+      {isMobile && showWaitlistForm && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          className="fixed inset-0 bg-white z-50 overflow-y-auto pt-16 px-4"
+        >
+          <button
+            onClick={() => setShowWaitlistForm(false)}
+            className="absolute top-4 right-4"
+          >
+            <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <JoinWaitlist onSuccess={handleWaitlistSuccess} />
+        </motion.div>
       )}
 
       {/* Main content */}
@@ -308,18 +328,6 @@ const HeroSection = () => {
                 )}
               </motion.button>
             </div>
-
-            {/* Mobile waitlist form with better spacing */}
-            {isMobile && showWaitlistForm && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                className="w-full mt-6 sm:mt-8"
-              >
-                <JoinWaitlist onSuccess={handleWaitlistSuccess} />
-              </motion.div>
-            )}
           </motion.div>
 
           {/* Right side - iPhone mockup with optimized mobile view */}
