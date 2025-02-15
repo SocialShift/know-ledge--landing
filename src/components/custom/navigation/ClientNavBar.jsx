@@ -114,14 +114,14 @@ const ClientNavBar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavigation(e, item.href)}
-                    className="text-sm transition-colors font-poppins px-6 py-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50/50"
+                    className="text-base transition-colors font-poppins px-8 py-2.5 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50/50"
                   >
                     {item.label}
                   </a>
                 ))}
                 <button 
                   onClick={handleOpenWaitlist}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-2 rounded-full text-sm font-semibold transition-colors font-poppins ml-8 shadow-sm hover:shadow-md"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-2.5 rounded-full text-base font-semibold transition-colors font-poppins ml-8 shadow-sm hover:shadow-md"
                 >
                   Join Waitlist
                 </button>
@@ -173,14 +173,14 @@ const ClientNavBar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavigation(e, item.href)}
-                    className="block px-4 py-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-poppins text-sm"
+                    className="block px-6 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-poppins text-base"
                   >
                     {item.label}
                   </a>
                 ))}
                 <button 
                   onClick={handleOpenWaitlist}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors font-poppins mt-4"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-base font-semibold transition-colors font-poppins mt-4"
                 >
                   Join Waitlist
                 </button>

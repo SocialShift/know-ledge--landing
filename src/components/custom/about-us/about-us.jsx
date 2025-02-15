@@ -60,7 +60,7 @@ const AboutUs = () => {
         >
           <div className="max-w-5xl mx-auto text-center">
             <div className="mb-12 sm:mb-16">
-              <span className="text-base sm:text-lg font-semibold text-blue-600 mb-3 sm:mb-4 block font-poppins tracking-wide">
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold text-blue-600 mb-3 sm:mb-4 block font-poppins tracking-wide">
                 Our Mission
               </span>
               <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-8 sm:mb-12 font-poppins leading-tight">

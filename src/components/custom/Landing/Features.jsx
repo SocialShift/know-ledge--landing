@@ -150,8 +150,8 @@ const Features = () => {
                   <div className={`flex flex-col ${index % 2 === 0 ? 'sm:flex-row items-start' : 'sm:flex-row-reverse items-end'} sm:items-center gap-4 sm:gap-10`}>
                     <div className="text-blue-400 w-16 sm:w-20 h-16 sm:h-20 mx-auto sm:mx-0 flex items-center justify-center">{reason.icon}</div>
                     <div className="text-center sm:text-left">
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">{reason.title}</h3>
-                      <p className="text-base sm:text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed">{reason.description}</p>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">{reason.title}</h3>
+                      <p className="text-sm sm:text-base md:text-lg text-blue-100/80 max-w-2xl leading-relaxed">{reason.description}</p>
                     </div>
                   </div>
                   <div className="absolute top-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
@@ -171,8 +171,8 @@ const Features = () => {
                   <div className={`flex flex-col ${index % 2 === 0 ? 'sm:flex-row items-start' : 'sm:flex-row-reverse items-end'} sm:items-center gap-4 sm:gap-10`}>
                     <div className="text-blue-400 w-16 sm:w-20 h-16 sm:h-20 mx-auto sm:mx-0 flex items-center justify-center">{feature.icon}</div>
                     <div className="text-center sm:text-left">
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">{feature.title}</h3>
-                      <p className="text-base sm:text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed">{feature.description}</p>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">{feature.title}</h3>
+                      <p className="text-sm sm:text-base md:text-lg text-blue-100/80 max-w-2xl leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
                   <div className="absolute top-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
