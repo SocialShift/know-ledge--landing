@@ -190,7 +190,7 @@ const AboutUs = () => {
                     84.9% of learners want to expand their knowledge of race, gender, sexual orientation, and ethnicity—but most platforms fail to deliver.
                   </p>
                   <p className="text-sm text-slate-500 font-poppins">
-                    Source: Early Adopter Survey, 2023
+                    Source: Early Adopter Survey, 2024
                   </p>
                 </div>
               </div>
