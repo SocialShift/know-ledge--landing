@@ -238,8 +238,8 @@ const HeroSection = () => {
                 onClick={handleJoinWaitlist}
                 className={`px-6 sm:px-8 py-3 sm:py-4 ${
                   state.isJoined 
-                    ? 'bg-green-500 hover:bg-green-600' 
-                    : 'bg-green-500 hover:bg-green-600'
+                    ? 'bg-[#9ACD32] hover:bg-[#8ab82d]'
+                    : 'bg-[#9ACD32] hover:bg-[#8ab82d]'
                 } text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-base relative`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
