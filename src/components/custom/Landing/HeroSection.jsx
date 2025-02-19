@@ -201,7 +201,7 @@ const HeroSection = () => {
             
             <div className="space-y-3 md:space-y-4 mb-5 md:mb-8">
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-poppins">
-                Question. Learn. Evolve. <br /> 📚 Experience History Like Never Before
+                Question. Learn. Evolve. <br />Experience History Like Never Before
               </p>
               
               <div className="max-w-xl">
