@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
@@ -9,29 +9,10 @@ import JoinWaitlist from '../forms/JoinWaitlist'
 const ClientNavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
-  const [prevScrollPos, setPrevScrollPos] = useState(0)
-  const [visible, setVisible] = useState(true)
   const pathname = usePathname()
   const router = useRouter()
   
   const isAboutPage = pathname === '/about' || pathname === '/about-us'
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY
-      const isScrollingUp = prevScrollPos > currentScrollPos
-      
-      const scrollDifference = Math.abs(prevScrollPos - currentScrollPos)
-      if (scrollDifference > 10) {
-        setVisible(isScrollingUp)
-      }
-      
-      setPrevScrollPos(currentScrollPos)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [prevScrollPos])
 
   const handleNavigation = (e, href) => {
     e.preventDefault()
@@ -84,9 +65,7 @@ const ClientNavBar = () => {
 
   return (
     <>
-      <nav className={`fixed top-2 sm:top-6 left-1/2 -translate-x-1/2 w-[95%] sm:w-[99%] max-w-[90rem] z-50 transition-transform duration-300 ${
-        visible ? 'translate-y-0' : '-translate-y-32'
-      }`}>
+      <nav className="fixed top-2 sm:top-6 left-1/2 -translate-x-1/2 w-[95%] sm:w-[99%] max-w-[90rem] z-50">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-sky-100/90 via-sky-200/90 to-sky-100/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg shadow-sky-200/20" />
           
@@ -114,7 +93,7 @@ const ClientNavBar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavigation(e, item.href)}
-                    className="text-base transition-colors font-poppins px-8 py-2.5 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50/50"
+                    className="text-xl transition-colors font-poppins px-8 py-2.5 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 font-medium"
                   >
                     {item.label}
                   </a>
@@ -173,7 +152,7 @@ const ClientNavBar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavigation(e, item.href)}
-                    className="block px-6 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-poppins text-base"
+                    className="block px-6 py-3 text-xl text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-poppins font-medium"
                   >
                     {item.label}
                   </a>

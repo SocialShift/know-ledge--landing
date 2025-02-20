@@ -138,9 +138,9 @@ const HeroSection = () => {
             </path>
             <defs>
               <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style={{ stopColor: '#3B82F6' }} />
-                <stop offset="50%" style={{ stopColor: '#2563EB' }} />
-                <stop offset="100%" style={{ stopColor: '#1D4ED8' }} />
+                <stop offset="0%" style={{ stopColor: '#EC4899' }} />
+                <stop offset="50%" style={{ stopColor: '#DB2777' }} />
+                <stop offset="100%" style={{ stopColor: '#BE185D' }} />
               </linearGradient>
             </defs>
           </svg>
@@ -170,7 +170,7 @@ const HeroSection = () => {
             <motion.path
               d="M100,0 A100,100 0 0,1 200,100"
               fill="none"
-              stroke="rgba(59, 130, 246, 0.3)"
+              stroke="rgba(236, 72, 153, 0.3)"
               strokeWidth="0.25"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}

@@ -160,7 +160,6 @@ const Features = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="absolute top-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
                 </motion.div>
               ))}
             </div>
@@ -187,7 +186,6 @@ const Features = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="absolute top-1/2 -translate-y-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
                 </motion.div>
               ))}
             </div>
