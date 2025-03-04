@@ -22,7 +22,7 @@ const poppins = Poppins({
 
 export const metadata = {
   icons: {
-    icon: '/logo/logo.svg',
+    icon: '/logo/logo.png',
   },
   title: "know[ledge] - Unlock Hidden History",
   description: "Your gateway to historical discovery through interactive learning",
