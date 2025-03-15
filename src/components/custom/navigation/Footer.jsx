@@ -129,7 +129,7 @@ const Footer = () => {
             
             {/* Copyright - Now on the right */}
             <p className="text-gray-600 text-sm font-poppins">
-              © 2025 know[ledge]. All rights reserved.
+              © 2025 SocialShift. All rights reserved.
             </p>
           </div>
         </div>
