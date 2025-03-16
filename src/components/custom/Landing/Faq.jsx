@@ -7,24 +7,36 @@ const Faq = () => {
 
   const faqs = [
     {
-      question: "What makes know[ledge] different from other history apps?",
-      answer: "know[ledge] combines cutting-edge technology with expert-curated historical content to create an immersive learning experience. Our platform features interactive timelines, AR experiences, and a global community of history enthusiasts, making historical discovery more engaging and accessible than ever before."
+      question: "Why was Know(ledge) created?",
+      answer: "We created the platform to fill a critical gap in historical representation by making overlooked narratives accessible, engaging, and immersive. Traditional education, books, and media often omit or minimize key events and perspectives related to race, gender, sexuality, and culture. Our mission is to readjust or unearth these stories by providing a space where users can explore untold histories, gain deeper insights, and engage in meaningful discussions that connect the past to the present."
     },
     {
-      question: "How does the interactive learning feature work?",
-      answer: "Our interactive learning features include augmented reality (AR) experiences, virtual museum tours, and interactive timelines. Users can explore historical artifacts in 3D, walk through historical sites virtually, and engage with multimedia content that brings history to life."
+      question: "What is Know(ledge)?",
+      answer: "We bring overlooked history to life through immersive storytelling, expert insights, and collaborative learning. Our focus is on highlighting untold narratives about race, gender, sexuality, and culture—stories often missing from mainstream education."
     },
     {
-      question: "Is know[ledge] suitable for educational institutions?",
-      answer: "Yes! know[ledge] is designed to complement educational curricula. We offer special features for educators, including lesson plans, classroom activities, and group learning tools. Our platform aligns with educational standards while making history engaging for students."
+      question: "Who is Know(ledge) for?",
+      answer:  "We’re designed for lifelong learners, educators, and socially conscious individuals who want to engage with history beyond textbooks. Whether you’re looking to explore new perspectives, contribute your own insights, or connect with a like-minded community, we provide an interactive space to deepen your understanding of historical events and their impact today."
     },
     {
-      question: "How often is new content added?",
-      answer: "We regularly update our content library with new historical narratives, artifacts, and interactive experiences. Our team of historians and content creators works continuously to add fresh content weekly, ensuring there's always something new to discover."
+      question: "What makes Know(ledge) different?",
+      answer: "Unlike traditional history platforms, we prioritize narratives that have been suppressed or overlooked. By combining immersive storytelling with community engagement, we allow users to not only learn but also participate in discussions, share insights, and contribute to a collective understanding of history."
     },
     {
-      question: "Can I contribute to the platform?",
-      answer: "Absolutely! know[ledge] encourages community contributions. Users can share historical research, participate in discussions, and even submit their own historical narratives for review. Our expert team verifies all submissions to maintain high-quality standards."
+      question: "How does Know(ledge) work?",
+      answer: "We integrate story-driven learning with collaborative features. Users can explore bite-sized historical narratives, engage in discussions with fellow seekers, access curated content on key historical events, and participate in knowledge-building challenges. Our platform is designed to be both interactive and informative, ensuring an engaging learning experience."
+    },
+    {
+      question: "Can I contribute to Know(ledge)?",
+      answer: "In the near future, yes! We are building a collaborative learning space where users can share historical insights, participate in discussions, and contribute recommended resources to enrich the platform. We welcome diverse perspectives and community-driven contributions that align with our mission of making history more inclusive and accessible."
+    },
+    {
+      question: "Is Know(ledge) free?",
+      answer: "We offer free access to core content, with premium features available for users who want a deeper, more interactive experience. Premium members gain access to exclusive expert discussions, additional learning tools, and a more personalized experience."
+    },
+    {
+      question: "How can I support Know(ledge)?",
+      answer: "You can support us by signing up for early access, sharing the platform with your network, participating in discussions, and providing feedback to help us improve. By engaging with the community and contributing to the learning experience, you help shape a more inclusive and comprehensive historical resource."
     }
   ]
 

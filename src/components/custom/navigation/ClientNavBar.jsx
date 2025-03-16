@@ -93,7 +93,7 @@ const ClientNavBar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavigation(e, item.href)}
-                    className="text-lg transition-colors font-poppins px-8 py-2.5 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 font-medium"
+                    className="text-base transition-colors font-poppins px-8 py-2.5 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 font-medium"
                   >
                     {item.label}
                   </a>

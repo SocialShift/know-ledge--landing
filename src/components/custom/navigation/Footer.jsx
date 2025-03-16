@@ -3,23 +3,16 @@ import Image from 'next/image'
 
 const Footer = () => {
   const footerLinks = {
-    product: [
-      { label: 'Features', href: '' },
-      { label: 'Pricing', href: '' },
-      { label: 'Download', href: '' },
-      { label: 'Updates', href: '' },
-    ],
+    // product: [
+    //   { label: 'Features', href: '' },
+    //   { label: 'Pricing', href: '' },
+    //   { label: 'Download', href: '' },
+    //   { label: 'Updates', href: '' },
+    // ],
     company: [
       { label: 'About', href: '/about-us' },
-      { label: 'Contact', href: '' },
       { label: 'Privacy Policy', href: '/privacy-policy' },
       { label: 'Terms of Service', href: '/termsNconditions' },
-    ],
-    resources: [
-      { label: 'Blog', href: '' },
-      { label: 'Documentation', href: '' },
-      { label: 'Community', href: '' },
-      { label: 'FAQ', href: '' },
     ],
   }
 
