@@ -87,7 +87,7 @@ const HeroSection = () => {
         <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
           <div className="relative w-full h-full">
             <Image
-              src="/images/hero/pillhero.png"
+              src="/images/ssk.jpeg"
               alt="know[ledge] app interface"
               fill
               sizes="(max-width: 768px) 280px, (max-width: 1200px) 320px, 320px"
