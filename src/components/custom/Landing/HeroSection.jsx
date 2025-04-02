@@ -87,11 +87,11 @@ const HeroSection = () => {
         <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
           <div className="relative w-full h-full">
             <Image
-              src="/images/hero/pillhero.png"
+              src="/images/appimg1.png"
               alt="know[ledge] app interface"
               fill
               sizes="(max-width: 768px) 280px, (max-width: 1200px) 320px, 320px"
-              className="object-cover"
+              className="object-contain w-[215%] h-[220%] scale-[1.1]"
               priority
             />
           </div>
