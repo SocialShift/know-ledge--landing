@@ -87,16 +87,15 @@ const HeroSection = () => {
         <div className="absolute inset-2 bg-white rounded-[2.75rem] overflow-hidden">
           <div className="relative w-full h-full">
             <Image
-              src="/images/hero/pillhero.png"
+              src="/appsc/timeline.jpg"
               alt="know[ledge] app interface"
               fill
               sizes="(max-width: 768px) 280px, (max-width: 1200px) 320px, 320px"
-              className="object-contain w-[215%] h-[220%] scale-[1.1]"
+              className="object-cover w-[280%] h-[220%] mb-10"
               priority
             />
           </div>
         </div>
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full" />
       </motion.div>
     );
   }, [isMobile]);
@@ -296,7 +295,7 @@ const HeroSection = () => {
 
             {/* iPhone Container */}
             <motion.div 
-              className="relative w-[260px] sm:w-[280px] md:w-[320px] h-[520px] sm:h-[570px] md:h-[650px] z-10"
+              className="relative w-[260px] sm:w-[280px] md:w-[320px] h-[550px] sm:h-[600px] md:h-[700px] z-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
