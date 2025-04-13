@@ -23,6 +23,15 @@ export default function Home() {
       {/* <Promo />
       <About /> */}
       <Faq />
+      <div className="flex justify-center py-8 bg-slate-300">
+        <a
+          href="mailto:info@knowhistory.xyz"
+          className="bg-black text-white font-bold py-3 px-6 rounded-lg transition-colors "
+          target="_blank"
+        >
+          Contact Us
+        </a>
+      </div>
       <ScrollToTop />
       {/* <Testimonials /> */}
     </main>
