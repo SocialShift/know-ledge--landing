@@ -13,6 +13,7 @@ const Footer = () => {
       { label: 'About', href: '/about-us' },
       { label: 'Privacy Policy', href: '/privacy-policy' },
       { label: 'Terms of Service', href: '/termsNconditions' },
+      { label: 'Contact', href: 'mailto:info@knowhistory.xyz' },
     ],
   }
 

@@ -23,14 +23,14 @@ export default function Home() {
       {/* <Promo />
       <About /> */}
       <Faq />
-      <div className="flex justify-center py-8 bg-slate-300">
+      {/* <div className="flex justify-center py-8 bg-slate-300">
         <a
           href="mailto:info@knowhistory.xyz"
           className="bg-black text-white font-bold py-3 px-6 rounded-lg transition-colors "
         >
           Contact Us
         </a>
-      </div>
+      </div> */}
       <ScrollToTop />
       {/* <Testimonials /> */}
     </main>
