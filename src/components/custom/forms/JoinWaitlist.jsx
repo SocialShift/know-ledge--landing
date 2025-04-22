@@ -14,6 +14,15 @@ const JoinWaitlist = ({ onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // If Android is selected, redirect to Play Store
+    if (formData.device === 'android') {
+      window.open('https://play.google.com/store/apps/details?id=com.knowhistory_knowledge.app', '_blank')
+      onSuccess?.()
+      return
+    }
+    
+    // Continue with iOS waitlist flow
     setIsSubmitting(true)
 
     try {
@@ -91,24 +100,26 @@ const JoinWaitlist = ({ onSuccess }) => {
         onSubmit={handleSubmit}
         className="space-y-6 bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg"
       >
-        <div className="space-y-2">
-          <label 
-            htmlFor="email"
-            className="block text-sm font-medium text-blue-900 font-poppins"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-poppins text-gray-800 bg-white/90"
-            placeholder="Enter your email address"
-          />
-        </div>
+        {formData.device === 'ios' && (
+          <div className="space-y-2">
+            <label 
+              htmlFor="email"
+              className="block text-sm font-medium text-blue-900 font-poppins"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required={formData.device === 'ios'}
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-poppins text-gray-800 bg-white/90"
+              placeholder="Enter your email address"
+            />
+          </div>
+        )}
 
         <div className="space-y-2">
           <label 
@@ -170,10 +181,21 @@ const JoinWaitlist = ({ onSuccess }) => {
             </>
           ) : (
             <>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              <span>Join Waitlist</span>
+              {formData.device === 'android' ? (
+                <>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  <span>Download App</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                  <span>Join Waitlist</span>
+                </>
+              )}
             </>
           )}
         </motion.button>
