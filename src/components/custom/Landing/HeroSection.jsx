@@ -186,7 +186,7 @@ const HeroSection = () => {
       <BackgroundAnimation />
       
       {/* Main content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 min-h-screen relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-6 min-h-screen relative">
         {/* Adjusted grid container with better mobile spacing */}
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-center md:pt-32">
           {/* Left side - Text content */}
@@ -227,15 +227,18 @@ const HeroSection = () => {
 
             {/* Buttons container with better mobile layout */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
-              <a href="https://play.google.com/store/apps/details?id=com.knowhistory_knowledge.app" target="_blank" rel="noopener noreferrer">
-              <button className="px-5 sm:px-5 py-3 sm:py-4 bg-blue-500 hover:bg-blue-900 text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-sm sm:text-base w-full sm:w-auto">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+              <a href="https://testflight.apple.com/join/xhzmTnHr" target="_blank" rel="noopener noreferrer">
+              <button className="px-2 sm:px-5 py-4 sm:py-4 bg-black hover:bg-blue-900 text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-sm sm:text-sm w-full sm:w-auto">
+              {/* <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.523 15.341l1.853-3.209c.107-.186.045-.424-.141-.531-.186-.107-.424-.045-.531.141l-1.877 3.25c-1.454-.84-3.082-1.316-4.827-1.316-1.745 0-3.373.476-4.827 1.316l-1.877-3.25c-.107-.186-.345-.248-.531-.141-.186.107-.248.345-.141.531l1.853 3.209C3.511 17.145 1.5 20.099 1.5 23.5h21c0-3.401-2.011-6.355-4.977-8.159zM7 17.75c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm10 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zM15.021 3.766l1.678-2.908c.107-.186.045-.424-.141-.531-.186-.107-.424-.045-.531.141l-1.695 2.937c-1.328-.538-2.801-.841-4.332-.841-1.531 0-3.004.303-4.332.841L3.973.468c-.107-.186-.345-.248-.531-.141-.186.107-.248.345-.141.531l1.678 2.908C2.012 5.129 0 7.997 0 11.278h20c0-3.281-2.012-6.149-4.979-7.512zm-9.021 4.512c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm8 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/>
-              </svg>
-                Download for Android
+              </svg> */}
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+                </svg>
+                Download for ios
               </button>
               </a>
-              <motion.button
+              {/* <motion.button
                 onClick={handleJoinWaitlist}
                 className={`px-6 sm:px-8 py-3 sm:py-4 ${
                   state.isJoined 
@@ -273,7 +276,16 @@ const HeroSection = () => {
                     Join Waitlist
                   </>
                 )}
-              </motion.button>
+              </motion.button> */}
+
+              <a href="https://play.google.com/store/apps/details?id=com.knowhistory_knowledge.app" target="_blank" rel="noopener noreferrer">
+                <button className="px-2 sm:px-5 py-4 sm:py-4 bg-blue-500 hover:bg-blue-900 text-white rounded-full font-semibold transition-colors flex items-center justify-center gap-2 font-poppins text-sm sm:text-sm w-full sm:w-auto">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.523 15.341l1.853-3.209c.107-.186.045-.424-.141-.531-.186-.107-.424-.045-.531.141l-1.877 3.25c-1.454-.84-3.082-1.316-4.827-1.316-1.745 0-3.373.476-4.827 1.316l-1.877-3.25c-.107-.186-.345-.248-.531-.141-.186.107-.248.345-.141.531l1.853 3.209C3.511 17.145 1.5 20.099 1.5 23.5h21c0-3.401-2.011-6.355-4.977-8.159zM7 17.75c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm10 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zM15.021 3.766l1.678-2.908c.107-.186.045-.424-.141-.531-.186-.107-.424-.045-.531.141l-1.695 2.937c-1.328-.538-2.801-.841-4.332-.841-1.531 0-3.004.303-4.332.841L3.973.468c-.107-.186-.345-.248-.531-.141-.186.107-.248.345-.141.531l1.678 2.908C2.012 5.129 0 7.997 0 11.278h20c0-3.281-2.012-6.149-4.979-7.512zm-9.021 4.512c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm8 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z"/>
+                </svg>
+                  Download for Android
+                </button>
+              </a>
             </div>
           </motion.div>
 

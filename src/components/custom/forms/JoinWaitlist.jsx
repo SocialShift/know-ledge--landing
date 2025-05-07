@@ -21,6 +21,7 @@ const JoinWaitlist = ({ onSuccess }) => {
       onSuccess?.()
       return
     }
+    // If iOS is selected, proceed with waitlist submission
     
     // Continue with iOS waitlist flow
     setIsSubmitting(true)
